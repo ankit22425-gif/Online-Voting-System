@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Verification Ballot | National E-Voting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='hhh.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container nav-wrapper">
+            <div class="brand">
+                <div class="emblem-placeholder">🏛️</div>
+                <div class="brand-text">
+                    <h1>Official Digital Ballot Page</h1>
+                    <p>Logged in Voter ID: <strong>{{ voter }}</strong></p>
+                </div>
+            </div>
+            <a href="/logout" class="btn-outline">Logout</a>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 20px;">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div style="padding: 15px; margin-bottom: 20px; border-radius: 6px; font-weight: 600; text-align: center; 
+                          background-color: {{ '#d4edda' if category == 'success' else '#f8d7da' }}; 
+                          color: {{ '#155724' if category == 'success' else '#721c24' }};">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Live Camera Verification Box -->
+        <div style="background: white; max-width: 700px; margin: 0 auto 20px auto; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center;">
+            <h4 style="color: #0f2c59; margin-bottom: 10px;">📹 Live Voter Identity Verification</h4>
+            <video id="webcam" width="280" height="210" autoplay style="border: 2px solid #0f2c59; border-radius: 6px; background: #000;"></video>
+            <canvas id="canvas" width="280" height="210" style="display:none;"></canvas>
+            <p style="font-size: 12px; color: #64748b; margin-top: 5px;">Vote par click karne par camera se photo capture karke identity verify ki jayegi.</p>
+        </div>
+
+        <h3 class="section-title">Official Ballot Paper - Select Candidate</h3>
+        
+        <div style="display: grid; gap: 15px; max-width: 700px; margin: 0 auto 40px auto;">
+            {% for candidate in candidates %}
+            <div style="background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 28px;">{{ candidate.symbol }}</span>
+                    <div>
+                        <h4 style="color: #0f2c59; margin-bottom: 2px;">{{ candidate.name }}</h4>
+                        <p style="font-size: 13px; color: #64748b;">{{ candidate.party }}</p>
+                    </div>
+                </div>
+
+                <form action="/cast_vote" method="POST" onsubmit="captureFace(this)">
+                    <input type="hidden" name="candidate_name" value="{{ candidate.name }}">
+                    <input type="hidden" name="live_image" class="live-image-input">
+                    {% if already_voted %}
+                        <button type="button" class="btn-primary" style="background-color: #94a3b8; cursor: not-allowed;" disabled>Already Voted</button>
+                    {% else %}
+                        <button type="submit" class="btn-primary">Cast Vote</button>
+                    {% endif %}
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('canvas');
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => { video.srcObject = stream; })
+                .catch(err => {
+                    console.error("Camera access error:", err);
+                });
+        }
+
+        function captureFace(form) {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, 280, 210);
+            const imageData = canvas.toDataURL('image/png');
+            form.querySelector('.live-image-input').value = imageData;
+        }
+    </script>
+</body>
+</html>

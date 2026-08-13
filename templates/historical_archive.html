@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Historical Election Records & Archive</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f4f6f9; }
+        .filter-card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #1f2d3d; color: white; }
+        select, input, button { padding: 8px 12px; border-radius: 4px; border: 1px solid #ccc; }
+        button { background: #28a745; color: white; border: none; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>🏛️ Historical Election Records Archive</h2>
+
+    <!-- SEARCH & FILTER FORM -->
+    <div class="filter-card">
+        <form method="GET" action="/historical-archive">
+            <label><b>Election Type:</b></label>
+            <select name="election_type">
+                <option value="">-- All Types --</option>
+                <option value="Lok Sabha" {% if selected_type == 'Lok Sabha' %}selected{% endif %}>Lok Sabha Voting</option>
+                <option value="Rajya Sabha" {% if selected_type == 'Rajya Sabha' %}selected{% endif %}>Rajya Sabha Voting</option>
+                <option value="Gram Panchayat" {% if selected_type == 'Gram Panchayat' %}selected{% endif %}>Gram Panchayat Voting</option>
+            </select>
+
+            <label style="margin-left: 15px;"><b>Year / Time Period:</b></label>
+            <input type="text" name="election_year" placeholder="e.g. 2026" value="{{ selected_year }}">
+
+            <button type="submit" style="margin-left: 15px;">🔍 Search Records</button>
+            <a href="/historical-archive" style="margin-left: 10px; color: #6c757d; text-decoration: none;">Reset Filter</a>
+        </form>
+    </div>
+
+    <!-- HISTORICAL LOGS TABLE -->
+    <table>
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>Voter ID</th>
+                <th>Candidate Voted</th>
+                <th>Election Type</th>
+                <th>Year</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>#{{ log.id }}</td>
+                <td>{{ log.voter_id }}</td>
+                <td>{{ log.candidate_name }}</td>
+                <td><strong>{{ log.election_type }}</strong></td>
+                <td>{{ log.election_year }}</td>
+                <td>{{ log.timestamp }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center;">Koi matching historical record nahi mila.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

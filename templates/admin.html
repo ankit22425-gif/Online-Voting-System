@@ -1,0 +1,99 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Rajya Sabha Election</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='hhh.css') }}">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; margin:0; padding:0; }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .card { background: white; border-radius: 10px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .btn-reset { background: #dc2626; color: white; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        .btn-reset:hover { background: #b91c1c; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+        th { background: #0f2c59; color: white; }
+    </style>
+</head>
+<body>
+    <header style="background: #0f2c59; color: white; padding: 15px 0; text-align: center;">
+        <h2>🏛️ Rajya Sabha Election - Control Panel & Live Counting</h2>
+    </header>
+
+    <div class="container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div style="padding: 15px; margin-bottom: 20px; border-radius: 6px; font-weight: bold; text-align: center; background: #d1fae5; color: #065f46; border: 1px solid #10b981;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Active Election Status Card -->
+        <div class="card" style="border-left: 6px solid #0f2c59; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="margin: 0; color: #0f2c59;">Current Live Election Status</h3>
+                <p style="margin: 5px 0 0 0; color: #64748b;">Total Live Votes Cast: <strong>{{ total_votes }}</strong></p>
+                {% if winner %}
+                    <p style="margin: 5px 0 0 0; color: #16a34a; font-weight: bold;">Current Leading Candidate: 🏆 {{ winner }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Declare Winner & Reset Election Button -->
+            <form action="/reset_election" method="POST" onsubmit="return confirm('Kya aap is Election ko khatam karke Winner declare karna chahte hain? Isse purana record history me chala jayega aur naya election start ho jayega.');">
+                <button type="submit" class="btn-reset">🏆 Declare Winner & Start New Election</button>
+            </form>
+        </div>
+
+        <!-- Live Results -->
+        <div class="card">
+            <h3 style="color: #0f2c59;">Live Tally</h3>
+            <div class="grid">
+                {% for r in results %}
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #cbd5e1;">
+                    <div style="font-size: 32px;">{{ r.symbol }}</div>
+                    <h4 style="margin: 5px 0;">{{ r.name }}</h4>
+                    <p style="font-size: 12px; color: #64748b; margin: 0;">{{ r.party }}</p>
+                    <h2 style="color: #0f2c59; margin: 10px 0 5px 0;">{{ r.votes }} Votes</h2>
+                    <span style="font-size: 13px; font-weight: bold; color: #2563eb;">{{ r.percentage }}%</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Past Election Archive History -->
+        <div class="card">
+            <h3 style="color: #0f2c59;">📂 Past Election History / Archive</h3>
+            {% if past_elections %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Election ID</th>
+                        <th>Winner Name</th>
+                        <th>Total Votes Polled</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pe in past_elections %}
+                    <tr>
+                        <td>#{{ pe[0] }}</td>
+                        <td><strong>🏆 {{ pe[1] }}</strong></td>
+                        <td>{{ pe[2] }} Votes</td>
+                        <td>{{ pe[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p style="color: #64748b;">Abhi tak koi purana election record archive nahi hua hai.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>

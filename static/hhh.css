@@ -1,0 +1,240 @@
+:root {
+    --primary-blue: #0f2c59;
+    --secondary-blue: #1b4985;
+    --accent-gold: #d97706;
+    --light-bg: #f8fafc;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Top Strip */
+.gov-top-bar {
+    background: #071931;
+    color: #cbd5e1;
+    font-size: 13px;
+    padding: 8px 0;
+    border-bottom: 1px solid #1e293b;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gov-accessibility a {
+    color: #94a3b8;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+/* Main Header */
+.main-header {
+    background: #ffffff;
+    border-bottom: 3px solid var(--primary-blue);
+    padding: 15px 0;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.emblem-placeholder {
+    font-size: 32px;
+}
+
+.brand-text h1 {
+    font-size: 20px;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.brand-text p {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.gov-btn-login {
+    background: var(--primary-blue);
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 50px 0;
+    background: linear-gradient(135deg, #eef2f6 0%, #ffffff 100%);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.badge {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hero-text h2 {
+    font-size: 36px;
+    color: var(--primary-blue);
+    margin: 15px 0;
+    line-height: 1.2;
+}
+
+.hero-text p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    background: var(--accent-gold);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-outline {
+    margin-left: 15px;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Card */
+.portal-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.card-header {
+    background: var(--primary-blue);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.features-list {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.features-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* Services Section */
+.services-section {
+    padding: 50px 0;
+}
+
+.section-title {
+    font-size: 22px;
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    border-left: 4px solid var(--accent-gold);
+    padding-left: 10px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.service-tile {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.tile-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.service-tile h4 {
+    color: var(--primary-blue);
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.service-tile p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.gov-footer {
+    background: var(--primary-blue);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 13px;
+    margin-top: 40px;
+}

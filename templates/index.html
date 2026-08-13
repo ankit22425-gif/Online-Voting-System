@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Electronic Voting Portal | Government Service</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='hhh.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Top Official Government Header Strip -->
+    <div class="gov-top-bar">
+        <div class="container top-bar-content">
+            <div class="gov-identity">
+                <span class="flag">🇮🇳</span> 
+                <span>An Official Government Digital Service Portal</span>
+            </div>
+            <div class="gov-accessibility">
+                <a href="#main-content">Skip to Main Content</a> | 
+                <a href="#">English</a> | 
+                <a href="#">हिंदी</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header">
+        <div class="container nav-wrapper">
+            <div class="brand">
+                <div class="emblem-placeholder">🏛️</div>
+                <div class="brand-text">
+                    <h1>National Voting Portal</h1>
+                    <p>Election Commission Digital Initiative</p>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#portal-services">Services</a></li>
+                     <li><a href="#about">About Election Board</a></li>
+                    <li><a href="#helpdesk">Helpdesk & Verification</a></li>
+                    <li><a href="/historical-archive">Historical Records</a></li>
+                    <li><a href="/login" class="gov-btn-login">Voter Login / Register</a></li>
+             <li><a href="/admin" class="gov-btn-login" style="background-color: #007bff; border-color: #007bff; color: white;">Admin Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="main-content">
+        <section class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <span class="badge">Verified Security • WCAG Compliant</span>
+                    <h2>Secure & Transparent Digital E-Voting Portal</h2>
+                    <p>Exercise your constitutional right securely online. Verified by End-to-End Encryption and Identity Authentication.</p>
+                    <div class="cta-buttons">
+                        <a href="/login"class="btn-primary" style="text-decoration:none; display: inline-block;">Cast your Vote Online</a>
+                        <a href="#portal-services" class="btn-outline">Explore Services</a>
+                    </div>
+                </div>
+
+                <div class="portal-card">
+                    <div class="card-header">
+                        <span class="icon">🔒</span>
+                        <h3>Voter Self-Service Panel</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Access your digital ballot using your Unique Voter ID and Aadhaar Multi-factor Authentication.</p>
+                        <ul class="features-list">
+                            <li>✔️ Instant Electoral Roll Check</li>
+                            <li>✔️ Live Candidate Profiles</li>
+                            <li>✔️ Cryptographic Vote Slip Generation</li>
+                        </ul>
+                        <div class="card-footer-info">
+                            <span>Status: <strong>Elections Active</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Quick Services Grid -->
+        <section class="services-section" id="portal-services">
+            <div class="container">
+                <h3 class="section-title">Official Citizen Services</h3>
+                <div class="services-grid">
+                    <div class="service-tile">
+                        <div class="tile-icon">📜</div>
+                        <h4>Electoral Roll Verification</h4>
+                        <p>Verify your voter registration status in national database.</p>
+                    </div>
+                    <div class="service-tile">
+                        <div class="tile-icon">👥</div>
+                        <h4>Candidate Affidavits</h4>
+                        <p>Review background details, assets, and candidate manifests.</p>
+                    </div>
+                    <div class="service-tile">
+                        <div class="tile-icon">📊</div>
+                        <h4>Live Election Analytics</h4>
+                        <p>Track real-time official election metrics and turnout data.</p>
+                    </div>
+                    <div class="service-tile">
+                        <div class="tile-icon">🛡️</div>
+                        <h4>Security & Audit Reports</h4>
+                        <p>Inspect election integrity and compliance audit logs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gov-footer">
+        <div class="container footer-content">
+            <p>© 2026 National E-Voting Services Portal | All Rights Reserved.</p>
+            <p>Designed for Accessibility & High-Security Citizen Governance.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='hhh.js') }}"></script>
+</body>
+</html>
