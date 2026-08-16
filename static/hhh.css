@@ -1,240 +1,137 @@
 :root {
-    --primary-blue: #0f2c59;
-    --secondary-blue: #1b4985;
-    --accent-gold: #d97706;
-    --light-bg: #f8fafc;
-    --text-dark: #1e293b;
-    --text-muted: #64748b;
-    --border-color: #cbd5e1;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', system-ui, sans-serif;
+    --gov-blue: #002147;
+    --gov-gold: #ff9933;
+    --gov-light: #f4f6f9;
+    --gov-card: #ffffff;
+    --text-dark: #222222;
 }
 
 body {
-    background-color: var(--light-bg);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--gov-light);
     color: var(--text-dark);
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Top Strip */
-.gov-top-bar {
-    background: #071931;
-    color: #cbd5e1;
-    font-size: 13px;
-    padding: 8px 0;
-    border-bottom: 1px solid #1e293b;
-}
-
-.top-bar-content {
+/* Header Styling */
+.gov-header {
+    background-color: var(--gov-blue);
+    color: white;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 4px solid var(--gov-gold);
 }
 
-.gov-accessibility a {
-    color: #94a3b8;
-    text-decoration: none;
-    margin: 0 5px;
-}
-
-/* Main Header */
-.main-header {
-    background: #ffffff;
-    border-bottom: 3px solid var(--primary-blue);
-    padding: 15px 0;
-}
-
-.nav-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.brand {
+.gov-brand {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.emblem-placeholder {
-    font-size: 32px;
-}
-
-.brand-text h1 {
+.gov-brand h1 {
     font-size: 20px;
-    color: var(--primary-blue);
-    font-weight: 700;
-}
-
-.brand-text p {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    align-items: center;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-dark);
+    margin: 0;
     font-weight: 600;
-    font-size: 14px;
+    letter-spacing: 0.5px;
 }
 
-.gov-btn-login {
-    background: var(--primary-blue);
-    color: white !important;
-    padding: 8px 16px;
+.gov-brand p {
+    margin: 0;
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* Container & Cards */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--gov-card);
+    padding: 30px;
     border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #e1e4e8;
 }
 
-/* Hero Section */
-.hero-section {
-    padding: 50px 0;
-    background: linear-gradient(135deg, #eef2f6 0%, #ffffff 100%);
+h2 {
+    color: var(--gov-blue);
+    border-bottom: 2px solid #e1e4e8;
+    padding-bottom: 10px;
+    margin-top: 0;
 }
 
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 40px;
-    align-items: center;
+/* Candidate Radio Selection Table */
+.candidate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
 }
 
-.badge {
-    background: #dbeafe;
-    color: #1e40af;
-    padding: 5px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
+.candidate-table th {
+    background-color: #f1f3f5;
+    color: var(--gov-blue);
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dee2e6;
 }
 
-.hero-text h2 {
-    font-size: 36px;
-    color: var(--primary-blue);
-    margin: 15px 0;
-    line-height: 1.2;
+.candidate-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
 }
 
-.hero-text p {
-    color: var(--text-muted);
-    font-size: 16px;
-    margin-bottom: 25px;
-    line-height: 1.6;
-}
-
-.btn-primary {
-    background: var(--accent-gold);
+/* Premium Buttons */
+.btn-submit {
+    background-color: var(--gov-blue);
     color: white;
     border: none;
     padding: 12px 24px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.btn-outline {
-    margin-left: 15px;
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* Card */
-.portal-card {
-    background: white;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-}
-
-.card-header {
-    background: var(--primary-blue);
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.features-list {
-    list-style: none;
-    margin: 15px 0;
-}
-
-.features-list li {
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-/* Services Section */
-.services-section {
-    padding: 50px 0;
-}
-
-.section-title {
-    font-size: 22px;
-    color: var(--primary-blue);
-    margin-bottom: 25px;
-    border-left: 4px solid var(--accent-gold);
-    padding-left: 10px;
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.service-tile {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-}
-
-.tile-icon {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.service-tile h4 {
-    color: var(--primary-blue);
-    margin-bottom: 8px;
     font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
 }
 
-.service-tile p {
-    font-size: 13px;
-    color: var(--text-muted);
+.btn-submit:hover {
+    background-color: #00142d;
 }
 
+.btn-logout {
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: bold;
+    float: right;
+}
+
+/* Alert Messages */
+.alert {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Footer */
 .gov-footer {
-    background: var(--primary-blue);
-    color: white;
     text-align: center;
-    padding: 20px 0;
+    padding: 20px;
     font-size: 13px;
+    color: #666;
+    border-top: 1px solid #ddd;
     margin-top: 40px;
 }

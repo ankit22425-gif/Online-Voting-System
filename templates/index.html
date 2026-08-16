@@ -1,125 +1,2027 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Electronic Voting Portal | Government Service</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='hhh.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <title>Government Election Portal | Online Voting System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #263238;
+        }
+
+        /* =========================
+           TRICOLOR TOP STRIP
+        ========================== */
+
+        .tricolor {
+            height: 7px;
+            background: linear-gradient(
+                to right,
+                #ff9933 0%,
+                #ff9933 33.33%,
+                #ffffff 33.33%,
+                #ffffff 66.66%,
+                #138808 66.66%,
+                #138808 100%
+            );
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #d9e0e8;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+        }
+
+        .header-container {
+            width: 92%;
+            max-width: 1200px;
+            min-height: 92px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .emblem {
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            border: 2px solid #9b7b3a;
+
+            background: #fffdf7;
+
+            font-size: 31px;
+
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+
+        .brand-text h1 {
+            color: #123c69;
+            font-size: 21px;
+            font-weight: 750;
+        }
+
+        .brand-text p {
+            color: #667085;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .official {
+            color: #667085;
+            font-size: 11px;
+        }
+
+        .portal {
+            color: #123c69;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            background: #123c69;
+        }
+
+        .nav-container {
+            width: 92%;
+            max-width: 1200px;
+            height: 46px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-title {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-status {
+            color: #dff5e6;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+
+            background: #35c76a;
+            border-radius: 50%;
+
+            margin-right: 5px;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            width: 92%;
+            max-width: 1200px;
+
+            min-height: 400px;
+
+            margin: 32px auto;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #0c2d4e,
+                    #123c69,
+                    #205c84
+                );
+
+            display: flex;
+            align-items: center;
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .hero-content {
+            width: 62%;
+            padding: 50px;
+            color: white;
+        }
+
+        .tag {
+            display: inline-block;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.12);
+
+            border: 1px solid rgba(255,255,255,0.25);
+
+            font-size: 11px;
+
+            margin-bottom: 18px;
+        }
+
+        .hero h2 {
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 span {
+            color: #ffbd66;
+        }
+
+        .hero p {
+            max-width: 620px;
+
+            color: #e7edf4;
+
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           HERO BADGES
+        ========================== */
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            margin-top: 20px;
+        }
+
+        .badge {
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.10);
+
+            border: 1px solid rgba(255,255,255,0.20);
+
+            color: white;
+
+            font-size: 11px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 26px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .voter-btn {
+            background: #ff9933;
+            color: white;
+        }
+
+        .voter-btn:hover {
+            background: #e88620;
+            transform: translateY(-2px);
+        }
+
+        .admin-btn {
+            background: white;
+            color: #123c69;
+        }
+
+        .admin-btn:hover {
+            background: #edf3f8;
+            transform: translateY(-2px);
+        }
+
+        .info-btn {
+            border: 1px solid rgba(255,255,255,0.55);
+            color: white;
+        }
+
+        .info-btn:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* =========================
+           HERO SYMBOL
+        ========================== */
+
+        .hero-symbol {
+            width: 38%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .symbol-circle {
+            width: 225px;
+            height: 225px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 100px;
+
+            background: rgba(255,255,255,0.08);
+
+            border: 2px solid rgba(255,255,255,0.28);
+
+            box-shadow:
+                0 0 0 14px rgba(255,255,255,0.04),
+                0 20px 40px rgba(0,0,0,0.20);
+        }
+
+        /* =========================
+           GENERAL SECTION
+        ========================== */
+
+        .section {
+            width: 92%;
+            max-width: 1200px;
+
+            margin: 50px auto;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            color: #123c69;
+            font-size: 25px;
+        }
+
+        .section-title p {
+            color: #667085;
+            font-size: 13px;
+
+            margin-top: 6px;
+        }
+
+        /* =========================
+           SERVICE CARDS
+        ========================== */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 17px;
+        }
+
+        .card {
+            background: white;
+
+            padding: 25px 18px;
+
+            border: 1px solid #e0e6ed;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            box-shadow: 0 12px 25px rgba(0,0,0,0.09);
+
+            border-color: #c7d6e4;
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: auto auto 14px;
+
+            border-radius: 50%;
+
+            background: #edf4fa;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+        .card h3 {
+            color: #263238;
+
+            font-size: 15px;
+
+            margin-bottom: 7px;
+        }
+
+        .card p {
+            color: #667085;
+
+            font-size: 12px;
+
+            line-height: 1.55;
+        }
+
+        /* =========================
+           VOTER NOTICE
+        ========================== */
+
+        .notice-box {
+            margin-top: 22px;
+
+            background: #fffaf0;
+
+            border: 1px solid #f1dfb5;
+
+            border-left: 5px solid #ff9933;
+
+            border-radius: 8px;
+
+            padding: 21px;
+        }
+
+        .notice-box h3 {
+            color: #123c69;
+
+            font-size: 16px;
+
+            margin-bottom: 9px;
+        }
+
+        .notice-box p {
+            color: #5f6368;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-top: 6px;
+        }
+
+        /* =========================
+           ELECTION INFORMATION
+        ========================== */
+
+        .election-information {
+            width: 92%;
+            max-width: 1000px;
+
+            margin: 60px auto;
+        }
+
+        .eci-header {
+            text-align: center;
+
+            background: white;
+
+            padding: 32px 20px;
+
+            border-top: 5px solid #ff9933;
+
+            border-bottom: 4px solid #138808;
+
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .eci-logo {
+            width: 82px;
+            height: 82px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fffdf7;
+
+            border: 2px solid #9b7b3a;
+
+            font-size: 40px;
+        }
+
+        .eci-header h1 {
+            color: #123c69;
+
+            font-size: 27px;
+
+            margin-top: 15px;
+        }
+
+        .eci-header h2 {
+            color: #344054;
+
+            font-size: 20px;
+
+            margin-top: 5px;
+        }
+
+        .portal-title {
+            color: #667085;
+
+            font-size: 12px;
+
+            margin-top: 9px;
+        }
+
+        /* =========================
+           NOTICE BANNER
+        ========================== */
+
+        .notice-banner {
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background: #fff8e6;
+
+            border: 1px solid #f1d38b;
+
+            border-left: 6px solid #ff9933;
+
+            border-radius: 8px;
+        }
+
+        .notice-banner strong {
+            color: #634d08;
+
+            font-size: 16px;
+        }
+
+        .notice-banner p {
+            color: #665b38;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-top: 7px;
+        }
+
+        /* =========================
+           RULE CARD
+        ========================== */
+
+        .information-card {
+            margin-top: 20px;
+
+            background: white;
+
+            padding: 30px;
+
+            border: 1px solid #dfe5eb;
+
+            border-radius: 10px;
+
+            box-shadow: 0 7px 22px rgba(0,0,0,0.06);
+        }
+
+        .information-card > h2 {
+            text-align: center;
+
+            color: #123c69;
+
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+        .rule {
+            display: flex;
+
+            gap: 17px;
+
+            padding: 19px 0;
+
+            border-bottom: 1px solid #eaecf0;
+        }
+
+        .rule:last-child {
+            border-bottom: none;
+        }
+
+        .number {
+            min-width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #123c69;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .rule h3 {
+            color: #123c69;
+
+            font-size: 14px;
+
+            margin-bottom: 7px;
+        }
+
+        .rule p {
+            color: #475467;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-top: 4px;
+        }
+
+        /* =========================
+           PUNISHMENT / WARNING
+        ========================== */
+
+        .warning-card {
+            margin-top: 20px;
+
+            padding: 23px;
+
+            background: #fff5f5;
+
+            border: 1px solid #f0caca;
+
+            border-left: 6px solid #d92d20;
+
+            border-radius: 8px;
+        }
+
+        .warning-card h2 {
+            color: #b42318;
+
+            font-size: 17px;
+
+            margin-bottom: 9px;
+        }
+
+        .warning-card p {
+            color: #5f3636;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-top: 6px;
+        }
+
+        /* =========================
+           FINAL NOTICE
+        ========================== */
+
+        .final-notice {
+            margin-top: 20px;
+
+            padding: 22px;
+
+            background: #f0f8f3;
+
+            border: 1px solid #c7dfce;
+
+            border-left: 6px solid #138808;
+
+            border-radius: 8px;
+        }
+
+        .final-notice h2 {
+            color: #123c69;
+
+            font-size: 17px;
+
+            margin-bottom: 8px;
+        }
+
+        .final-notice p {
+            color: #344054;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-top: 6px;
+        }
+
+        /* =========================
+           QUICK LINKS
+        ========================== */
+
+        .quick-links {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .quick-link {
+            text-decoration: none;
+
+            background: white;
+
+            color: #123c69;
+
+            border: 1px solid #d7e0e8;
+
+            padding: 9px 16px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+        .quick-link:hover {
+            background: #123c69;
+
+            color: white;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            margin-top: 55px;
+
+            background: #102f4f;
+
+            color: #dbe5ef;
+        }
+
+        .footer-main {
+            width: 92%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 32px 0;
+
+            display: grid;
+
+            grid-template-columns: 1.5fr 1fr 1fr;
+
+            gap: 35px;
+        }
+
+        .footer-main h3 {
+            color: white;
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        .footer-main p {
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+        .footer-links a {
+            display: block;
+
+            color: #dbe5ef;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            margin-bottom: 7px;
+        }
+
+        .footer-links a:hover {
+            color: #ffbd66;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.12);
+
+            text-align: center;
+
+            padding: 13px;
+
+            font-size: 10px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .header-right {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .hero-content {
+                width: 100%;
+
+                padding: 45px 25px;
+            }
+
+            .hero-content p {
+                margin: auto;
+            }
+
+            .hero-buttons,
+            .badges {
+                justify-content: center;
+            }
+
+            .hero-symbol {
+                display: none;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .header-container {
+                min-height: 75px;
+            }
+
+            .emblem {
+                width: 50px;
+                height: 50px;
+
+                font-size: 25px;
+            }
+
+            .brand-text h1 {
+                font-size: 16px;
+            }
+
+            .brand-text p {
+                font-size: 10px;
+            }
+
+            .nav-title {
+                font-size: 10px;
+            }
+
+            .nav-status {
+                font-size: 9px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .information-card {
+                padding: 18px;
+            }
+
+            .rule {
+                gap: 10px;
+            }
+
+            .number {
+                min-width: 35px;
+                height: 35px;
+            }
+
+            .rule h3 {
+                font-size: 13px;
+            }
+
+            .rule p {
+                font-size: 11px;
+            }
+
+            .eci-header h1 {
+                font-size: 21px;
+            }
+
+            .eci-header h2 {
+                font-size: 17px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-    <!-- Top Official Government Header Strip -->
-    <div class="gov-top-bar">
-        <div class="container top-bar-content">
-            <div class="gov-identity">
-                <span class="flag">🇮🇳</span> 
-                <span>An Official Government Digital Service Portal</span>
-            </div>
-            <div class="gov-accessibility">
-                <a href="#main-content">Skip to Main Content</a> | 
-                <a href="#">English</a> | 
-                <a href="#">हिंदी</a>
-            </div>
-        </div>
-    </div>
 
-    <!-- Main Navigation Header -->
-    <header class="main-header">
-        <div class="container nav-wrapper">
+    <!-- =========================
+         TRICOLOR
+    ========================== -->
+
+    <div class="tricolor"></div>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="header-container">
+
             <div class="brand">
-                <div class="emblem-placeholder">🏛️</div>
-                <div class="brand-text">
-                    <h1>National Voting Portal</h1>
-                    <p>Election Commission Digital Initiative</p>
+
+                <div class="emblem">
+                    🏛️
                 </div>
+
+                <div class="brand-text">
+
+                    <h1>
+                        Government Election Portal
+                    </h1>
+
+                    <p>
+                        Digital Governance • Secure • Transparent • Trusted
+                    </p>
+
+                </div>
+
             </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#portal-services">Services</a></li>
-                     <li><a href="#about">About Election Board</a></li>
-                    <li><a href="#helpdesk">Helpdesk & Verification</a></li>
-                    <li><a href="/historical-archive">Historical Records</a></li>
-                    <li><a href="/login" class="gov-btn-login">Voter Login / Register</a></li>
-             <li><a href="/admin" class="gov-btn-login" style="background-color: #007bff; border-color: #007bff; color: white;">Admin Dashboard</a></li>
-                </ul>
-            </nav>
+
+
+            <div class="header-right">
+
+                <div class="official">
+                    Online Voting Management System
+                </div>
+
+                <div class="portal">
+                    RAJYA SABHA ELECTION
+                </div>
+
+            </div>
+
         </div>
+
     </header>
 
-    <!-- Hero Section -->
-    <main id="main-content">
-        <section class="hero-section">
-            <div class="container hero-grid">
-                <div class="hero-text">
-                    <span class="badge">Verified Security • WCAG Compliant</span>
-                    <h2>Secure & Transparent Digital E-Voting Portal</h2>
-                    <p>Exercise your constitutional right securely online. Verified by End-to-End Encryption and Identity Authentication.</p>
-                    <div class="cta-buttons">
-                        <a href="/login"class="btn-primary" style="text-decoration:none; display: inline-block;">Cast your Vote Online</a>
-                        <a href="#portal-services" class="btn-outline">Explore Services</a>
-                    </div>
-                </div>
 
-                <div class="portal-card">
-                    <div class="card-header">
-                        <span class="icon">🔒</span>
-                        <h3>Voter Self-Service Panel</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Access your digital ballot using your Unique Voter ID and Aadhaar Multi-factor Authentication.</p>
-                        <ul class="features-list">
-                            <li>✔️ Instant Electoral Roll Check</li>
-                            <li>✔️ Live Candidate Profiles</li>
-                            <li>✔️ Cryptographic Vote Slip Generation</li>
-                        </ul>
-                        <div class="card-footer-info">
-                            <span>Status: <strong>Elections Active</strong></span>
-                        </div>
-                    </div>
-                </div>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+
+        <div class="nav-container">
+
+            <div class="nav-title">
+                🗳️ Rajya Sabha Election — Online Voting System
             </div>
-        </section>
 
-        <!-- Key Quick Services Grid -->
-        <section class="services-section" id="portal-services">
-            <div class="container">
-                <h3 class="section-title">Official Citizen Services</h3>
-                <div class="services-grid">
-                    <div class="service-tile">
-                        <div class="tile-icon">📜</div>
-                        <h4>Electoral Roll Verification</h4>
-                        <p>Verify your voter registration status in national database.</p>
-                    </div>
-                    <div class="service-tile">
-                        <div class="tile-icon">👥</div>
-                        <h4>Candidate Affidavits</h4>
-                        <p>Review background details, assets, and candidate manifests.</p>
-                    </div>
-                    <div class="service-tile">
-                        <div class="tile-icon">📊</div>
-                        <h4>Live Election Analytics</h4>
-                        <p>Track real-time official election metrics and turnout data.</p>
-                    </div>
-                    <div class="service-tile">
-                        <div class="tile-icon">🛡️</div>
-                        <h4>Security & Audit Reports</h4>
-                        <p>Inspect election integrity and compliance audit logs.</p>
-                    </div>
-                </div>
+            <div class="nav-status">
+
+                <span class="status-dot"></span>
+
+                Portal Active
+
             </div>
-        </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="gov-footer">
-        <div class="container footer-content">
-            <p>© 2026 National E-Voting Services Portal | All Rights Reserved.</p>
-            <p>Designed for Accessibility & High-Security Citizen Governance.</p>
         </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+
+        <div class="hero-content">
+
+            <div class="tag">
+                🇮🇳 SECURE DIGITAL ELECTION
+            </div>
+
+
+            <h2>
+
+                Your Vote.
+
+                <span>
+                    Your Voice.
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                Welcome to the Online Voting Portal.
+                Participate in the election through a secure,
+                transparent and easy-to-use digital voting system.
+
+            </p>
+
+
+            <!-- BADGES -->
+
+            <div class="badges">
+
+                <span class="badge">
+                    🔒 Secure Voting
+                </span>
+
+                <span class="badge">
+                    👤 One Person – One Vote
+                </span>
+
+                <span class="badge">
+                    📷 Live Verification
+                </span>
+
+                <span class="badge">
+                    📊 Transparent Counting
+                </span>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="hero-buttons">
+
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="btn voter-btn"
+                >
+                    🔐 Voter Login
+                </a>
+
+
+                <a
+                    href="{{ url_for('admin_login') }}"
+                    class="btn admin-btn"
+                >
+                    🔑 Admin Login
+                </a>
+
+
+                <a
+                    href="#information"
+                    class="btn info-btn"
+                >
+                    ℹ️ Election Information
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- VOTING ICON -->
+
+        <div class="hero-symbol">
+
+            <div class="symbol-circle">
+
+                🗳️
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================== -->
+
+    <section class="section">
+
+
+        <div class="section-title">
+
+            <h2>
+                Online Voting Services
+            </h2>
+
+            <p>
+                Secure and transparent digital election facilities
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- CARD 1 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🪪
+                </div>
+
+                <h3>
+                    Voter Authentication
+                </h3>
+
+                <p>
+                    Voter ID based authentication for
+                    authorized voters.
+                </p>
+
+            </div>
+
+
+            <!-- CARD 2 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Secure Voting
+                </h3>
+
+                <p>
+                    One voter can cast only one vote
+                    during the active election.
+                </p>
+
+            </div>
+
+
+            <!-- CARD 3 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📷
+                </div>
+
+                <h3>
+                    Live Verification
+                </h3>
+
+                <p>
+                    Webcam based live photo verification
+                    can be performed during voting.
+                </p>
+
+            </div>
+
+
+            <!-- CARD 4 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Election Records
+                </h3>
+
+                <p>
+                    Results and previous election records
+                    can be maintained by the administrator.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- VOTER NOTICE -->
+
+        <div class="notice-box">
+
+            <h3>
+                ⚠️ Important Voter Notice
+            </h3>
+
+
+            <p>
+
+                <b>English:</b>
+
+                Keep your Voter ID ready before accessing
+                the voting portal. Do not share your login
+                information with anyone. Carefully verify
+                your candidate before submitting your vote.
+
+            </p>
+
+
+            <p>
+
+                <b>हिंदी:</b>
+
+                मतदान पोर्टल खोलने से पहले अपनी Voter ID
+                तैयार रखें। अपनी लॉगिन जानकारी किसी के
+                साथ साझा न करें। वोट जमा करने से पहले
+                उम्मीदवार की जानकारी ध्यानपूर्वक जाँचें।
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ELECTION INFORMATION
+    ========================== -->
+
+    <section
+        class="election-information"
+        id="information"
+    >
+
+
+        <!-- INFORMATION HEADER -->
+
+        <div class="eci-header">
+
+
+            <div class="eci-logo">
+                🏛️
+            </div>
+
+
+            <h1>
+                Election Information
+            </h1>
+
+
+            <h2>
+                चुनाव संबंधी जानकारी
+            </h2>
+
+
+            <p class="portal-title">
+                Online Voting Information & Guidelines
+            </p>
+
+
+        </div>
+
+
+        <!-- NOTICE -->
+
+        <div class="notice-banner">
+
+
+            <strong>
+
+                ⚠️ Important Election Notice /
+                महत्वपूर्ण चुनाव सूचना
+
+            </strong>
+
+
+            <p>
+
+                <b>English:</b>
+
+                Please read all instructions carefully
+                before participating in the election.
+
+            </p>
+
+
+            <p>
+
+                <b>हिंदी:</b>
+
+                चुनाव में भाग लेने से पहले सभी निर्देशों
+                को ध्यानपूर्वक पढ़ें।
+
+            </p>
+
+
+        </div>
+
+
+        <!-- RULES -->
+
+        <div class="information-card">
+
+
+            <h2>
+                🗳️ Election Rules / चुनाव नियम
+            </h2>
+
+
+            <!-- RULE 1 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    01
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Valid Voter ID /
+                        वैध मतदाता पहचान
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Use your own valid Voter ID while
+                        participating in the election.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        चुनाव में भाग लेते समय केवल अपनी
+                        वैध मतदाता पहचान का ही उपयोग करें।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 2 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    02
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        One Person – One Vote /
+                        एक व्यक्ति – एक वोट
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        A voter can cast only one vote
+                        in the current election.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        वर्तमान चुनाव में प्रत्येक मतदाता
+                        केवल एक बार वोट डाल सकता है।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 3 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    03
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Live Photo /
+                        लाइव फोटो
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        A live webcam photo may be required
+                        during voting. Allow camera access
+                        when requested.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        मतदान के दौरान लाइव वेबकैम फोटो
+                        आवश्यक हो सकती है। अनुरोध किए जाने
+                        पर कैमरा अनुमति दें।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 4 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    04
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Verify Your Choice /
+                        अपनी पसंद की जाँच करें
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Carefully check the candidate name
+                        and party before submitting your vote.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        वोट जमा करने से पहले उम्मीदवार का
+                        नाम और पार्टी ध्यानपूर्वक जाँच लें।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 5 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    05
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        No Duplicate Voting /
+                        दोबारा मतदान निषिद्ध
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Casting more than one vote or attempting
+                        to vote again using another identity
+                        is prohibited.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        एक से अधिक बार मतदान करना या किसी
+                        अन्य पहचान का उपयोग करके दोबारा
+                        वोट देने का प्रयास निषिद्ध है।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 6 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    06
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        No Impersonation /
+                        प्रतिरूपण निषिद्ध
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Do not use another person's Voter ID
+                        or identity to cast a vote.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        किसी अन्य व्यक्ति की मतदाता पहचान
+                        या पहचान का उपयोग करके मतदान न करें।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 7 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    07
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Protect Your Credentials /
+                        अपनी जानकारी सुरक्षित रखें
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Do not share your Voter ID, password
+                        or login information with anyone.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        अपनी Voter ID, पासवर्ड या लॉगिन
+                        जानकारी किसी के साथ साझा न करें।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 8 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    08
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        No System Misuse /
+                        सिस्टम का दुरुपयोग नहीं
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Unauthorized access, modification of
+                        election data or interference with the
+                        voting system is prohibited.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        बिना अनुमति सिस्टम में प्रवेश करना,
+                        चुनावी डेटा बदलना या मतदान प्रणाली
+                        में हस्तक्षेप करना निषिद्ध है।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 9 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    09
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Fair Participation /
+                        निष्पक्ष भागीदारी
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Participate honestly and respect
+                        the rights of other voters.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        ईमानदारी से मतदान करें और अन्य
+                        मतदाताओं के अधिकारों का सम्मान करें।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RULE 10 -->
+
+            <div class="rule">
+
+                <span class="number">
+                    10
+                </span>
+
+
+                <div>
+
+                    <h3>
+                        Action Against Violations /
+                        नियम उल्लंघन पर कार्रवाई
+                    </h3>
+
+
+                    <p>
+
+                        <b>English:</b>
+
+                        Fraudulent voting, impersonation,
+                        unauthorized access or misuse of the
+                        election system may result in restriction
+                        of access and appropriate disciplinary or
+                        legal action under applicable rules and laws.
+
+                    </p>
+
+
+                    <p>
+
+                        <b>हिंदी:</b>
+
+                        फर्जी मतदान, प्रतिरूपण, अनधिकृत प्रवेश
+                        या चुनावी प्रणाली के दुरुपयोग के मामले
+                        में पहुँच प्रतिबंधित की जा सकती है तथा
+                        लागू नियमों और कानूनों के अनुसार उचित
+                        अनुशासनात्मक या कानूनी कार्रवाई हो सकती है।
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- WARNING -->
+
+        <div class="warning-card">
+
+
+            <h2>
+                ⚠️ Fraud & Misuse Warning /
+                धोखाधड़ी एवं दुरुपयोग चेतावनी
+            </h2>
+
+
+            <p>
+
+                <b>English:</b>
+
+                Any attempt to use a false identity,
+                cast duplicate votes, access the system
+                without authorization, manipulate election
+                records or interfere with the voting process
+                is prohibited.
+
+            </p>
+
+
+            <p>
+
+                <b>हिंदी:</b>
+
+                गलत पहचान का उपयोग करना, दोबारा मतदान करना,
+                बिना अनुमति सिस्टम में प्रवेश करना, चुनावी
+                रिकॉर्ड में छेड़छाड़ करना या मतदान प्रक्रिया
+                में हस्तक्षेप करना निषिद्ध है।
+
+            </p>
+
+
+            <p>
+
+                <b>Action / कार्रवाई:</b>
+
+                Such activity may lead to account restriction,
+                removal from the system and appropriate action
+                according to applicable rules and laws.
+
+            </p>
+
+
+        </div>
+
+
+        <!-- FINAL NOTICE -->
+
+        <div class="final-notice">
+
+
+            <h2>
+                ✅ Important / महत्वपूर्ण
+            </h2>
+
+
+            <p>
+
+                <b>English:</b>
+
+                Vote responsibly. Verify your candidate
+                carefully before submitting your vote.
+                Once submitted, the vote cannot be changed
+                through this system.
+
+            </p>
+
+
+            <p>
+
+                <b>हिंदी:</b>
+
+                जिम्मेदारी से मतदान करें। वोट जमा करने से
+                पहले उम्मीदवार की जानकारी ध्यानपूर्वक जाँचें।
+                इस सिस्टम में वोट जमा होने के बाद उसे बदला
+                नहीं जा सकता।
+
+            </p>
+
+
+        </div>
+
+
+        <!-- QUICK LINKS -->
+
+        <div class="quick-links">
+
+
+            <a
+                href="{{ url_for('login') }}"
+                class="quick-link"
+            >
+                🔐 Voter Login
+            </a>
+
+
+            <a
+                href="{{ url_for('admin_login') }}"
+                class="quick-link"
+            >
+                🔑 Admin Login
+            </a>
+
+
+            <a
+                href="#information"
+                class="quick-link"
+            >
+                ℹ️ Election Rules
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+
+        <div class="footer-main">
+
+
+            <div>
+
+                <h3>
+                    Online Election Portal
+                </h3>
+
+
+                <p>
+                    Rajya Sabha Election
+                    <br>
+                    Online Voting Management System
+                </p>
+
+
+                <p style="margin-top:8px;">
+                    Secure • Transparent • Responsible
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>
+                    Quick Access
+                </h3>
+
+
+                <a href="{{ url_for('login') }}">
+                    Voter Login
+                </a>
+
+
+                <a href="{{ url_for('admin_login') }}">
+                    Admin Login
+                </a>
+
+
+                <a href="#information">
+                    Election Information
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    System Features
+                </h3>
+
+
+                <p>
+                    🔒 Secure Voting
+                    <br>
+                    📷 Live Verification
+                    <br>
+                    📊 Vote Counting
+                    <br>
+                    📁 Election Records
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Online Election Portal |
+            Academic Project |
+            All Rights Reserved
+
+        </div>
+
+
     </footer>
 
-    <script src="{{ url_for('static', filename='hhh.js') }}"></script>
+
 </body>
+
 </html>

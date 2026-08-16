@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vote Successfully Cast | Election Portal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            min-height: 100vh;
+            color: #263238;
+        }
+
+        /* ================= TRICOLOR ================= */
+
+        .tricolor {
+            height: 7px;
+            background: linear-gradient(
+                to right,
+                #ff9933 0%,
+                #ff9933 33.33%,
+                #ffffff 33.33%,
+                #ffffff 66.66%,
+                #138808 66.66%,
+                #138808 100%
+            );
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: white;
+            border-bottom: 1px solid #d9dee5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            width: 92%;
+            max-width: 1100px;
+            min-height: 85px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .emblem {
+            width: 58px;
+            height: 58px;
+
+            border: 2px solid #8a6d3b;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+            background: #fffdf7;
+        }
+
+        .brand h1 {
+            color: #123c69;
+            font-size: 21px;
+        }
+
+        .brand p {
+            color: #667085;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .secure {
+            color: #067647;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= NAV ================= */
+
+        nav {
+            background: #123c69;
+        }
+
+        .nav {
+            width: 92%;
+            max-width: 1100px;
+            height: 45px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ================= MAIN ================= */
+
+        main {
+            width: 92%;
+            max-width: 750px;
+            margin: 55px auto;
+        }
+
+        .success-card {
+            background: white;
+
+            border: 1px solid #dfe4ea;
+            border-radius: 12px;
+
+            padding: 45px 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,0.08);
+        }
+
+        /* ================= SUCCESS ICON ================= */
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #ecfdf3;
+            border: 3px solid #12b76a;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 48px;
+
+            color: #067647;
+        }
+
+        .success-card h2 {
+            margin-top: 25px;
+
+            color: #067647;
+
+            font-size: 29px;
+        }
+
+        .success-card .subtitle {
+            margin-top: 9px;
+
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+        /* ================= MESSAGE ================= */
+
+        .message-box {
+            margin: 25px auto;
+
+            max-width: 560px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e4e7ec;
+
+            border-left: 5px solid #138808;
+
+            border-radius: 7px;
+
+            padding: 17px;
+
+            text-align: left;
+
+            color: #475467;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .message-box strong {
+            color: #123c69;
+        }
+
+        /* ================= SECURITY ================= */
+
+        .security {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin: 25px auto;
+
+            max-width: 600px;
+        }
+
+        .security-item {
+            padding: 15px 10px;
+
+            background: #fff;
+
+            border: 1px solid #e4e7ec;
+
+            border-radius: 7px;
+        }
+
+        .security-item .icon {
+            font-size: 24px;
+        }
+
+        .security-item strong {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #344054;
+
+            font-size: 12px;
+        }
+
+        .security-item span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #667085;
+
+            font-size: 10px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .home-btn {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 12px 27px;
+
+            background: #123c69;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .home-btn:hover {
+            background: #0d3155;
+            transform: translateY(-1px);
+        }
+
+        /* ================= RECEIPT ================= */
+
+        .receipt-note {
+            margin-top: 22px;
+
+            color: #667085;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 30px;
+
+            background: #102f4f;
+
+            color: #dbe5ef;
+        }
+
+        .footer-main {
+            width: 92%;
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 24px 0;
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer h3 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        footer p {
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.12);
+
+            text-align: center;
+
+            padding: 12px;
+
+            font-size: 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 650px) {
+
+            .secure {
+                display: none;
+            }
+
+            .brand h1 {
+                font-size: 17px;
+            }
+
+            .brand p {
+                font-size: 10px;
+            }
+
+            .emblem {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            main {
+                margin-top: 30px;
+            }
+
+            .success-card {
+                padding: 35px 20px;
+            }
+
+            .success-card h2 {
+                font-size: 23px;
+            }
+
+            .security {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .footer-right {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TRICOLOR -->
+
+    <div class="tricolor"></div>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="header">
+
+            <div class="brand">
+
+                <div class="emblem">
+                    🏛️
+                </div>
+
+                <div>
+
+                    <h1>
+                        Government Election Portal
+                    </h1>
+
+                    <p>
+                        Secure • Transparent • Digital Voting
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="secure">
+                🔒 Secure Election System
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="nav">
+
+            <div class="nav-title">
+                🗳️ Online Voting System
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <div class="success-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <h2>
+                Vote Successfully Cast!
+            </h2>
+
+            <p class="subtitle">
+                आपका वोट सफलतापूर्वक दर्ज कर लिया गया है।
+            </p>
+
+
+            <!-- INFORMATION -->
+
+            <div class="message-box">
+
+                <strong>
+                    Thank you for participating in the election.
+                </strong>
+
+                <br>
+
+                Your vote has been securely recorded in the
+                current election database. Your voter session
+                has now been closed.
+
+                <br><br>
+
+                <strong>
+                    Important:
+                </strong>
+
+                Once a vote has been submitted, it cannot be
+                changed or cancelled.
+
+
+            </div>
+
+
+            <!-- SECURITY FEATURES -->
+
+            <div class="security">
+
+
+                <div class="security-item">
+
+                    <div class="icon">
+                        ✓
+                    </div>
+
+                    <strong>
+                        Vote Recorded
+                    </strong>
+
+                    <span>
+                        Successfully stored
+                    </span>
+
+                </div>
+
+
+                <div class="security-item">
+
+                    <div class="icon">
+                        🔒
+                    </div>
+
+                    <strong>
+                        Secure
+                    </strong>
+
+                    <span>
+                        Protected session
+                    </span>
+
+                </div>
+
+
+                <div class="security-item">
+
+                    <div class="icon">
+                        🗳️
+                    </div>
+
+                    <strong>
+                        One Vote
+                    </strong>
+
+                    <span>
+                        Duplicate voting blocked
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- HOME BUTTON -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="home-btn"
+            >
+                🏠 Return to Home
+            </a>
+
+
+            <!-- NOTE -->
+
+            <div class="receipt-note">
+
+                Please do not refresh or resubmit this page.
+                <br>
+
+                This page confirms that your vote submission
+                process has been completed.
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div>
+
+                <h3>
+                    Government Election Portal
+                </h3>
+
+                <p>
+                    Online Voting Management System<br>
+                    Secure Digital Election Platform
+                </p>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                <h3>
+                    Election Security
+                </h3>
+
+                <p>
+                    🔒 Secure Session<br>
+                    📷 Live Photo Capture<br>
+                    🗳️ One Person — One Vote
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 Online Voting System |
+            Secure Digital Governance
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

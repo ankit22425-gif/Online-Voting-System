@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | Government Election Portal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f4f6f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tricolor top */
+        .tricolor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 7px;
+
+            background: linear-gradient(
+                to right,
+                #ff9933 0%,
+                #ff9933 33.33%,
+                #ffffff 33.33%,
+                #ffffff 66.66%,
+                #138808 66.66%,
+                #138808 100%
+            );
+        }
+
+        /* Main card */
+        .login-card {
+            width: 400px;
+            max-width: 92%;
+
+            background: white;
+
+            padding: 38px 35px;
+
+            border-radius: 14px;
+
+            border: 1px solid #dfe4ea;
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.12);
+
+            text-align: center;
+        }
+
+        /* Government emblem */
+        .emblem {
+            width: 78px;
+            height: 78px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: #fffdf5;
+
+            border: 2px solid #9b7b3a;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 38px;
+        }
+
+        h1 {
+            margin-top: 18px;
+
+            color: #123c69;
+
+            font-size: 25px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+        /* Notice */
+        .notice {
+            margin-top: 22px;
+
+            padding: 13px;
+
+            background: #f1f6fb;
+
+            border-left: 4px solid #123c69;
+
+            border-radius: 5px;
+
+            text-align: left;
+
+            color: #344054;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* Error message */
+        .error {
+            margin-top: 15px;
+
+            padding: 10px;
+
+            background: #fff1f1;
+
+            border: 1px solid #f5c2c7;
+
+            border-radius: 5px;
+
+            color: #b42318;
+
+            font-size: 12px;
+        }
+
+        /* Input */
+        .field {
+            margin-top: 18px;
+
+            text-align: left;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #344054;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #cfd6df;
+
+            border-radius: 6px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #123c69;
+
+            box-shadow:
+                0 0 0 3px rgba(18, 60, 105, 0.10);
+        }
+
+        /* Login button */
+        button {
+            width: 100%;
+
+            margin-top: 23px;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #123c69;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #0d3155;
+
+            transform: translateY(-1px);
+        }
+
+        /* Security */
+        .security {
+            margin-top: 20px;
+
+            color: #067647;
+
+            font-size: 11px;
+        }
+
+        /* Back */
+        .back {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: #123c69;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 25px;
+
+            color: #98a2b3;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .emblem {
+                width: 68px;
+                height: 68px;
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tricolor"></div>
+
+    <div class="login-card">
+
+        <!-- Government Emblem -->
+        <div class="emblem">
+            🏛️
+        </div>
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p class="subtitle">
+            Government Election Portal
+        </p>
+
+        <!-- Notice -->
+        <div class="notice">
+            <strong>🔐 Authorized Access Only</strong>
+            <br>
+            This section is restricted to authorized
+            election administrators.
+        </div>
+
+        <!-- Flask Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="error">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+        <!-- Login Form -->
+        <form
+            method="POST"
+            action="{{ url_for('admin_login') }}"
+        >
+
+            <!-- Admin ID -->
+            <div class="field">
+
+                <label for="admin_id">
+                    Admin ID
+                </label>
+
+                <input
+                    type="text"
+                    id="admin_id"
+                    name="admin_id"
+                    placeholder="Enter Admin ID"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+            <!-- Password -->
+            <div class="field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <!-- Submit -->
+            <button type="submit">
+                🔐 Secure Admin Login
+            </button>
+
+        </form>
+
+        <!-- Security -->
+        <div class="security">
+            🛡️ Secure Session • Authorized Administrator
+        </div>
+
+        <!-- Back -->
+        <a
+            href="{{ url_for('home') }}"
+            class="back"
+        >
+            ← Back to Home
+        </a>
+
+        <div class="footer">
+            Online Voting Management System<br>
+            Digital Election Administration Portal
+        </div>
+
+    </div>
+
+</body>
+</html>
