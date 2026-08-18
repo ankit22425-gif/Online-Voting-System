@@ -8,627 +8,312 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Cast Your Vote | Election Portal</title>
+    <title>
+        Cast Your Vote
+    </title>
 
     <style>
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
         }
 
         body {
-            background: #f4f6f8;
-            color: #263238;
-        }
 
-        .tricolor {
-            height: 7px;
-            background: linear-gradient(
-                to right,
-                #ff9933 0%,
-                #ff9933 33.33%,
-                #ffffff 33.33%,
-                #ffffff 66.66%,
-                #138808 66.66%,
-                #138808 100%
-            );
-        }
+            margin: 0;
 
-        header {
-            background: white;
-            border-bottom: 1px solid #d9dee5;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+            font-family:
+                Arial,
+                sans-serif;
 
-        .header-container {
-            width: 92%;
-            max-width: 1150px;
-            min-height: 85px;
-            margin: auto;
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fafc
+                );
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+            color: #172033;
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .emblem {
-            width: 58px;
-            height: 58px;
-
-            border: 2px solid #8a6d3b;
-            border-radius: 50%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: #fffdf7;
-            font-size: 28px;
-        }
-
-        .brand h1 {
-            color: #123c69;
-            font-size: 21px;
-        }
-
-        .brand p {
-            color: #667085;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        .secure {
-            color: #067647;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        nav {
-            background: #123c69;
-        }
-
-        .nav-container {
-            width: 92%;
-            max-width: 1150px;
-            height: 46px;
-            margin: auto;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-title {
-            color: white;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .logout {
-            color: white;
-            text-decoration: none;
-            font-size: 12px;
-
-            padding: 6px 13px;
-
-            border: 1px solid rgba(255,255,255,0.35);
-            border-radius: 5px;
         }
 
         .container {
-            width: 92%;
-            max-width: 1100px;
+
+            width: 94%;
+
+            max-width: 1000px;
+
             margin: 30px auto;
+
         }
 
-        .page-title {
+        .election-header {
+
             text-align: center;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.08);
+
             margin-bottom: 25px;
+
+            border-top:
+                6px solid #2563eb;
+
         }
 
-        .page-title h2 {
-            color: #123c69;
-            font-size: 28px;
+        .flag {
+
+            font-size: 55px;
+
         }
 
-        .page-title p {
-            color: #667085;
-            font-size: 13px;
-            margin-top: 5px;
+        .election-header h1 {
+
+            margin: 8px 0;
+
+            font-size: 38px;
+
+            font-weight: 900;
+
         }
 
-        .voter-info {
-            background: white;
+        .election-header h2 {
 
-            border: 1px solid #dfe4ea;
-            border-left: 5px solid #138808;
+            margin: 5px 0;
 
-            border-radius: 8px;
+            font-size: 22px;
 
-            padding: 15px 18px;
-            margin-bottom: 22px;
+            color: #2563eb;
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .voter-info small {
-            display: block;
-            color: #667085;
-            font-size: 11px;
-            margin-bottom: 3px;
+        .voter-box {
+
+            background: #ecfdf5;
+
+            border:
+                1px solid #86efac;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            margin-top: 15px;
+
         }
 
-        .voter-info strong {
-            color: #123c69;
-            font-size: 15px;
-        }
+        .candidate-grid {
 
-        .verified {
-            background: #ecfdf3;
-            color: #067647;
-
-            border: 1px solid #abefc6;
-
-            padding: 6px 11px;
-
-            border-radius: 20px;
-
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .voting-grid {
             display: grid;
-            grid-template-columns: 1.25fr 1fr;
-            gap: 20px;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 18px;
+
         }
 
-        .panel {
+        .candidate-card {
+
             background: white;
 
-            border: 1px solid #dfe4ea;
-            border-radius: 9px;
+            border-radius: 16px;
 
-            overflow: hidden;
+            padding: 22px;
 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-        }
-
-        .panel-header {
-            background: #123c69;
-            color: white;
-
-            padding: 16px 19px;
-        }
-
-        .panel-header h3 {
-            font-size: 16px;
-        }
-
-        .panel-header p {
-            font-size: 11px;
-            opacity: 0.85;
-            margin-top: 4px;
-        }
-
-        .panel-body {
-            padding: 20px;
-        }
-
-        /* CANDIDATE */
-
-        .candidate {
-            position: relative;
-
-            display: flex;
-            align-items: center;
-
-            gap: 13px;
-
-            padding: 14px;
-
-            border: 2px solid #dfe4ea;
-            border-radius: 7px;
-
-            margin-bottom: 12px;
+            border:
+                2px solid #e2e8f0;
 
             cursor: pointer;
 
-            transition: 0.2s;
+            transition: .2s;
 
-            user-select: none;
         }
 
-        .candidate:hover {
-            background: #f8fafc;
-            border-color: #123c69;
+        .candidate-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                #2563eb;
+
         }
 
-        .candidate.selected {
-            background: #eef4fa;
-            border-color: #123c69;
+        .candidate-card.selected {
 
-            box-shadow:
-                0 0 0 2px rgba(18,60,105,0.08);
+            border-color:
+                #16a34a;
+
+            background:
+                #f0fdf4;
+
         }
 
-        .candidate input {
-            position: absolute;
+        .candidate-symbol {
 
-            opacity: 0;
+            font-size: 65px;
 
-            width: 1px;
-            height: 1px;
+            text-align: center;
+
+            margin-bottom: 10px;
+
         }
 
-        .radio {
-            width: 20px;
-            height: 20px;
+        .candidate-card h3 {
 
-            border: 2px solid #98a2b3;
+            text-align: center;
 
-            border-radius: 50%;
-
-            flex-shrink: 0;
-        }
-
-        .candidate.selected .radio {
-            border-color: #123c69;
-
-            background: #123c69;
-
-            box-shadow:
-                inset 0 0 0 4px white;
-        }
-
-        .symbol {
-            width: 46px;
-            height: 46px;
-
-            background: #f1f4f7;
-
-            border-radius: 7px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 5px 0;
 
             font-size: 23px;
+
         }
 
-        .candidate-info {
-            flex: 1;
-        }
+        .party {
 
-        .candidate-info strong {
-            display: block;
-
-            color: #263238;
-
-            font-size: 14px;
-        }
-
-        .candidate-info span {
-            display: block;
-
-            color: #667085;
-
-            font-size: 11px;
-
-            margin-top: 3px;
-        }
-
-        /* CAMERA */
-
-        .camera-box {
             text-align: center;
+
+            color: #64748b;
+
+            font-size: 17px;
+
         }
 
-        .camera-container {
-            position: relative;
+        .vote-radio {
 
-            width: 100%;
-            max-width: 360px;
-
-            margin: auto;
-
-            background: #111827;
-
-            border-radius: 9px;
-
-            overflow: hidden;
-
-            border: 3px solid #dfe4ea;
-        }
-
-        #camera {
-            display: block;
-
-            width: 100%;
-            height: 270px;
-
-            object-fit: cover;
-
-            transform: scaleX(-1);
-
-            background: #111827;
-        }
-
-        #photoPreview {
             display: none;
 
+        }
+
+        .selected-text {
+
+            display: none;
+
+            text-align: center;
+
+            color: #16a34a;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+
+        }
+
+        .candidate-card.selected
+        .selected-text {
+
+            display: block;
+
+        }
+
+        .photo-section {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-top: 25px;
+
+            text-align: center;
+
+        }
+
+        video {
+
             width: 100%;
-            height: 270px;
 
-            object-fit: cover;
+            max-width: 500px;
 
-            transform: scaleX(-1);
+            border-radius: 14px;
+
+            background: black;
+
         }
 
-        .camera-label {
-            position: absolute;
+        canvas {
 
-            top: 10px;
-            left: 10px;
+            display: none;
 
-            background: rgba(0,0,0,0.65);
-
-            color: white;
-
-            padding: 5px 9px;
-
-            border-radius: 4px;
-
-            font-size: 10px;
-        }
-
-        .camera-status {
-            margin-top: 12px;
-
-            font-size: 12px;
-
-            color: #667085;
-        }
-
-        .camera-status.success {
-            color: #067647;
-            font-weight: 700;
-        }
-
-        .camera-status.error {
-            color: #b42318;
-            font-weight: 700;
-        }
-
-        .camera-buttons {
-            display: flex;
-
-            gap: 8px;
-
-            justify-content: center;
-
-            margin-top: 13px;
-        }
-
-        .camera-btn {
-            border: none;
-
-            border-radius: 6px;
-
-            padding: 10px 14px;
-
-            cursor: pointer;
-
-            font-size: 12px;
-
-            font-weight: 700;
         }
 
         .capture-btn {
-            background: #123c69;
-            color: white;
-        }
 
-        .capture-btn:disabled {
-            background: #98a2b3;
-            cursor: not-allowed;
-        }
-
-        .retake-btn {
-            background: #eef4fa;
-
-            color: #123c69;
-
-            border: 1px solid #cdddec;
-        }
-
-        .verification-box {
             margin-top: 15px;
 
-            padding: 12px;
+            border: 0;
 
-            border-radius: 6px;
-
-            background: #f8fafc;
-
-            border: 1px solid #e4e7ec;
-
-            font-size: 11px;
-
-            color: #667085;
-
-            line-height: 1.6;
-
-            text-align: left;
-        }
-
-        .verification-box strong {
-            color: #344054;
-        }
-
-        /* SUBMIT */
-
-        .submit-btn {
-            width: 100%;
-
-            margin-top: 20px;
-
-            height: 50px;
-
-            border: none;
-
-            border-radius: 6px;
-
-            background: #123c69;
+            background: #2563eb;
 
             color: white;
 
-            font-size: 15px;
+            padding: 13px 25px;
 
-            font-weight: 700;
+            border-radius: 9px;
 
             cursor: pointer;
 
-            transition: 0.2s;
+            font-weight: bold;
+
         }
 
-        .submit-btn:hover {
-            background: #0d3155;
+        .submit-btn {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 18px;
+
+            border: 0;
+
+            border-radius: 12px;
+
+            background: #16a34a;
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
         }
 
         .submit-btn:disabled {
-            background: #98a2b3;
+
+            background: #94a3b8;
 
             cursor: not-allowed;
+
         }
 
-        .notice {
-            margin-top: 18px;
+        .back {
 
-            padding: 13px;
-
-            background: #fff8eb;
-
-            border: 1px solid #fedf89;
-
-            border-left: 4px solid #ff9933;
-
-            border-radius: 6px;
-
-            color: #795548;
-
-            font-size: 11px;
-
-            line-height: 1.6;
-        }
-
-        footer {
-            margin-top: 40px;
-
-            background: #102f4f;
-
-            color: #dbe5ef;
-        }
-
-        .footer-main {
-            width: 92%;
-            max-width: 1150px;
-
-            margin: auto;
-
-            padding: 25px 0;
-
-            display: flex;
-
-            justify-content: space-between;
-        }
-
-        footer h3 {
-            color: white;
-
-            font-size: 14px;
-
-            margin-bottom: 6px;
-        }
-
-        footer p {
-            font-size: 11px;
-
-            line-height: 1.6;
-        }
-
-        .footer-right {
-            text-align: right;
-        }
-
-        .copyright {
-            border-top: 1px solid rgba(255,255,255,0.12);
+            display: block;
 
             text-align: center;
 
-            padding: 12px;
+            margin-top: 20px;
 
-            font-size: 10px;
-        }
+            color: #2563eb;
 
-        @media (max-width: 850px) {
-
-            .voting-grid {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-        @media (max-width: 600px) {
-
-            .secure {
-                display: none;
-            }
-
-            .brand h1 {
-                font-size: 17px;
-            }
-
-            .brand p {
-                font-size: 10px;
-            }
-
-            .emblem {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-            }
-
-            .voter-info {
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 10px;
-            }
-
-            .footer-main {
-                flex-direction: column;
-
-                gap: 15px;
-            }
-
-            .footer-right {
-                text-align: left;
-            }
+            text-decoration: none;
 
         }
 
@@ -639,87 +324,31 @@
 
 <body>
 
-<div class="tricolor"></div>
+
+<div class="container">
 
 
-<header>
+    <!-- =========================================
+         ELECTION HEADER
+    ========================================== -->
 
-    <div class="header-container">
+    <div class="election-header">
 
-        <div class="brand">
-
-            <div class="emblem">
-                🏛️
-            </div>
-
-            <div>
-
-                <h1>
-                    Government Election Portal
-                </h1>
-
-                <p>
-                    Secure • Transparent • Digital Voting
-                </p>
-
-            </div>
-
+        <div class="flag">
+            🇮🇳
         </div>
 
-        <div class="secure">
-            🔒 Secure Voting Session
-        </div>
-
-    </div>
-
-</header>
-
-
-<nav>
-
-    <div class="nav-container">
-
-        <div class="nav-title">
-            🗳️ Online Election — Voter Panel
-        </div>
-
-        <a
-            href="{{ url_for('logout') }}"
-            class="logout"
-        >
-            Logout
-        </a>
-
-    </div>
-
-</nav>
-
-
-<main class="container">
-
-
-    <div class="page-title">
+        <h1>
+            {{ election.election_name }}
+        </h1>
 
         <h2>
-            Cast Your Vote
+            ONLINE VOTING
         </h2>
 
-        <p>
-            Select your candidate and complete live voter verification.
-        </p>
+        <div class="voter-box">
 
-    </div>
-
-
-    <!-- VOTER INFO -->
-
-    <div class="voter-info">
-
-        <div>
-
-            <small>
-                Authenticated Voter ID
-            </small>
+            Voter ID:
 
             <strong>
                 {{ voter }}
@@ -727,987 +356,372 @@
 
         </div>
 
-        <div class="verified">
-            ✓ AUTHENTICATED
-        </div>
-
     </div>
 
 
-    <!-- VOTE FORM -->
+    <!-- =========================================
+         VOTE FORM
+    ========================================== -->
 
     <form
-        action="{{ url_for('cast_vote') }}"
         method="POST"
+        action="{{ url_for('cast_vote') }}"
         id="voteForm"
     >
 
-        <div class="voting-grid">
 
+        <h2>
+            Select Your Candidate
+        </h2>
 
-            <!-- CANDIDATES -->
 
-            <div class="panel">
+        <div class="candidate-grid">
 
-                <div class="panel-header">
 
-                    <h3>
-                        🗳️ Select Candidate
-                    </h3>
+            {% for candidate in candidates %}
 
-                    <p>
-                        Select one candidate to cast your vote.
-                    </p>
+                <label
+                    class="candidate-card"
+                    data-id="{{ candidate.id }}"
+                >
 
-                </div>
-
-
-                <div class="panel-body">
-
-
-                    {% if candidates %}
-
-                        {% for candidate in candidates %}
-
-                        <label
-                            class="candidate"
-                            onclick="selectCandidate(this)"
-                        >
-
-                            <input
-                                type="radio"
-                                name="candidate_name"
-                                value="{{ candidate.name }}"
-                                required
-                            >
-
-                            <div class="radio"></div>
-
-                            <div class="symbol">
-                                {{ candidate.symbol }}
-                            </div>
-
-                            <div class="candidate-info">
-
-                                <strong>
-                                    {{ candidate.name }}
-                                </strong>
-
-                                <span>
-                                    {{ candidate.party }}
-                                </span>
-
-                            </div>
-
-                        </label>
-
-                        {% endfor %}
-
-                    {% else %}
-
-                        <div style="
-                            text-align:center;
-                            padding:40px 15px;
-                            color:#667085;
-                        ">
-
-                            <div style="font-size:45px;">
-                                🗳️
-                            </div>
-
-                            <h3 style="
-                                margin-top:10px;
-                                color:#344054;
-                            ">
-                                No Candidates Available
-                            </h3>
-
-                        </div>
-
-                    {% endif %}
-
-
-                    <div class="notice">
-
-                        <strong>
-                            Important:
-                        </strong>
-
-                        Your vote is confidential.
-                        Once submitted, the vote cannot be changed
-                        or cancelled.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CAMERA -->
-
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <h3>
-                        📷 Live Voter Verification
-                    </h3>
-
-                    <p>
-                        Capture a live photo before voting.
-                    </p>
-
-                </div>
-
-
-                <div class="panel-body">
-
-                    <div class="camera-box">
-
-
-                        <div class="camera-container">
-
-                            <video
-                                id="camera"
-                                autoplay
-                                muted
-                                playsinline
-                            ></video>
-
-
-                            <img
-                                id="photoPreview"
-                                alt="Captured Live Photo"
-                            >
-
-
-                            <canvas
-                                id="canvas"
-                                style="display:none;"
-                            ></canvas>
-
-
-                            <div class="camera-label">
-                                LIVE CAMERA
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            id="cameraStatus"
-                            class="camera-status"
-                        >
-                            Starting camera...
-                        </div>
-
-
-                        <div class="camera-buttons">
-
-                            <button
-                                type="button"
-                                class="camera-btn capture-btn"
-                                id="captureBtn"
-                                onclick="capturePhoto()"
-                                disabled
-                            >
-                                📸 Capture Live Photo
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="camera-btn retake-btn"
-                                id="retakeBtn"
-                                onclick="retakePhoto()"
-                                style="display:none;"
-                            >
-                                🔄 Retake Photo
-                            </button>
-
-                        </div>
-
-
-                        <!-- VERY IMPORTANT -->
-
-                        <input
-                            type="hidden"
-                            name="live_image"
-                            id="live_photo"
-                            value=""
-                        >
-
-
-                        <div class="verification-box">
-
-                            <strong>
-                                Verification:
-                            </strong>
-
-                            Your live photograph is captured
-                            only for project verification
-                            and stored with your vote record.
-
-                        </div>
-
-
-                    </div>
-
-
-                    <!-- SUBMIT -->
-
-                    <button
-                        type="submit"
-                        id="submitVote"
-                        class="submit-btn"
-                        disabled
+                    <input
+                        type="radio"
+                        class="vote-radio"
+                        name="candidate_id"
+                        value="{{ candidate.id }}"
+                        required
                     >
-                        Capture Photo First
-                    </button>
 
-                </div>
 
-            </div>
+                    <div class="candidate-symbol">
+
+                        {{ candidate.symbol }}
+
+                    </div>
+
+
+                    <h3>
+
+                        {{ candidate.name }}
+
+                    </h3>
+
+
+                    <div class="party">
+
+                        {{ candidate.party }}
+
+                    </div>
+
+
+                    <div class="selected-text">
+
+                        ✓ SELECTED
+
+                    </div>
+
+                </label>
+
+            {% endfor %}
+
 
         </div>
+
+
+        <!-- =========================================
+             PHOTO
+        ========================================== -->
+
+        <div class="photo-section">
+
+            <h2>
+                📷 Live Photo
+            </h2>
+
+            <p>
+                Capture your photo before submitting your vote.
+            </p>
+
+            <video
+                id="video"
+                autoplay
+                playsinline
+            ></video>
+
+            <br>
+
+            <button
+                type="button"
+                class="capture-btn"
+                onclick="capturePhoto()"
+            >
+                📸 Capture Photo
+            </button>
+
+            <canvas
+                id="canvas"
+            ></canvas>
+
+            <input
+                type="hidden"
+                name="live_image"
+                id="live_image"
+            >
+
+            <p id="photoStatus"></p>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-btn"
+            id="submitBtn"
+            disabled
+        >
+            🗳️ CAST YOUR VOTE
+        </button>
+
 
     </form>
 
-</main>
+
+    <a
+        href="{{ url_for('logout') }}"
+        class="back"
+    >
+        Exit Voting
+    </a>
 
 
-<footer>
+</div>
 
-    <div class="footer-main">
-
-        <div>
-
-            <h3>
-                Government Election Portal
-            </h3>
-
-            <p>
-                Secure digital voting demonstration project.
-            </p>
-
-        </div>
-
-
-        <div class="footer-right">
-
-            <h3>
-                Voter Support
-            </h3>
-
-            <p>
-                Please ensure your camera is enabled.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="copyright">
-
-        © 2026 Online Voting System | Academic Project
-
-    </div>
-
-</footer>
-
-
-<!-- ==========================================
-     JAVASCRIPT
-========================================== -->
 
 <script>
 
-let cameraStream = null;
+const cards =
+    document.querySelectorAll(
+        ".candidate-card"
+    );
+
+const submitBtn =
+    document.getElementById(
+        "submitBtn"
+    );
+
+const video =
+    document.getElementById(
+        "video"
+    );
+
+const canvas =
+    document.getElementById(
+        "canvas"
+    );
+
+const liveImage =
+    document.getElementById(
+        "live_image"
+    );
+
+const photoStatus =
+    document.getElementById(
+        "photoStatus"
+    );
+
 
 let photoCaptured = false;
 
 
-// ==========================================
-// PAGE LOAD
-// ==========================================
+cards.forEach(
+    function(card) {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+        card.addEventListener(
+            "click",
+            function() {
 
-        console.log(
-            "Vote page loaded"
+                cards.forEach(
+                    function(c) {
+
+                        c.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+                card.classList.add(
+                    "selected"
+                );
+
+                const radio =
+                    card.querySelector(
+                        "input"
+                    );
+
+                radio.checked = true;
+
+                updateSubmit();
+
+            }
         );
-
-        startCamera();
-
-        updateSubmitButton();
 
     }
 );
 
 
-// ==========================================
-// CANDIDATE
-// ==========================================
-
-function selectCandidate(element) {
-
-    const candidates =
-        document.querySelectorAll(
-            ".candidate"
-        );
-
-
-    candidates.forEach(
-        function (candidate) {
-
-            candidate.classList.remove(
-                "selected"
-            );
-
-        }
-    );
-
-
-    element.classList.add(
-        "selected"
-    );
-
-
-    const radio =
-        element.querySelector(
-            'input[type="radio"]'
-        );
-
-
-    if (radio) {
-
-        radio.checked = true;
-
-    }
-
-
-    console.log(
-        "Candidate:",
-        radio ? radio.value : ""
-    );
-
-
-    updateSubmitButton();
-
-}
-
-
-// ==========================================
+// =====================================================
 // CAMERA
-// ==========================================
+// =====================================================
 
-async function startCamera() {
+navigator.mediaDevices
+    .getUserMedia({
+        video: true
+    })
+    .then(
+        function(stream) {
 
-    const video =
-        document.getElementById(
-            "camera"
-        );
-
-    const status =
-        document.getElementById(
-            "cameraStatus"
-        );
-
-    const captureBtn =
-        document.getElementById(
-            "captureBtn"
-        );
-
-
-    if (!video) {
-
-        console.error(
-            "Video element missing"
-        );
-
-        return;
-
-    }
-
-
-    if (
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia
-    ) {
-
-        status.textContent =
-            "Camera is not supported.";
-
-        status.classList.add(
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        status.textContent =
-            "Requesting camera permission...";
-
-
-        cameraStream =
-            await navigator.mediaDevices.getUserMedia({
-
-                video: {
-                    facingMode: "user",
-                    width: {
-                        ideal: 640
-                    },
-                    height: {
-                        ideal: 480
-                    }
-                },
-
-                audio: false
-
-            });
-
-
-        video.srcObject =
-            cameraStream;
-
-
-        video.style.display =
-            "block";
-
-
-        await video.play();
-
-
-        status.textContent =
-            "✓ Camera ready. Face clearly visible.";
-
-
-        status.classList.remove(
-            "error"
-        );
-
-        status.classList.add(
-            "success"
-        );
-
-
-        captureBtn.disabled =
-            false;
-
-
-        console.log(
-            "Camera started successfully"
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Camera Error:",
-            error.name,
-            error.message
-        );
-
-
-        status.textContent =
-            "❌ Camera access failed: " +
-            error.name;
-
-
-        status.classList.remove(
-            "success"
-        );
-
-        status.classList.add(
-            "error"
-        );
-
-
-        captureBtn.disabled =
-            true;
-
-
-        if (
-            error.name ===
-            "NotAllowedError"
-        ) {
-
-            alert(
-                "Camera permission denied.\n\n" +
-                "Click the camera icon 🔒 near the browser address bar " +
-                "and allow Camera permission.\n\n" +
-                "Then reload the page."
-            );
-
-        } else {
-
-            alert(
-                "Camera could not start.\n\n" +
-                "Error: " +
-                error.name
-            );
+            video.srcObject = stream;
 
         }
+    )
+    .catch(
+        function(error) {
 
-    }
+            console.log(
+                "Camera error:",
+                error
+            );
 
-}
+            photoStatus.innerText =
+                "Camera permission required.";
+
+        }
+    );
 
 
-// ==========================================
+// =====================================================
 // CAPTURE
-// ==========================================
+// =====================================================
 
 function capturePhoto() {
 
-    const video =
-        document.getElementById(
-            "camera"
-        );
+    if (!video.videoWidth) {
 
-    const canvas =
-        document.getElementById(
-            "canvas"
-        );
-
-    const preview =
-        document.getElementById(
-            "photoPreview"
-        );
-
-    const livePhoto =
-        document.getElementById(
-            "live_photo"
-        );
-
-    const status =
-        document.getElementById(
-            "cameraStatus"
-        );
-
-    const captureBtn =
-        document.getElementById(
-            "captureBtn"
-        );
-
-    const retakeBtn =
-        document.getElementById(
-            "retakeBtn"
-        );
-
-
-    if (
-        !video ||
-        !canvas ||
-        !preview ||
-        !livePhoto
-    ) {
-
-        alert(
-            "Camera elements missing."
-        );
+        photoStatus.innerText =
+            "Camera is not ready.";
 
         return;
 
     }
-
-
-    if (!cameraStream) {
-
-        alert(
-            "Camera is not running."
-        );
-
-        return;
-
-    }
-
-
-    const width =
-        video.videoWidth;
-
-    const height =
-        video.videoHeight;
-
-
-    if (!width || !height) {
-
-        alert(
-            "Camera is not ready. Please wait."
-        );
-
-        return;
-
-    }
-
 
     canvas.width =
-        width;
+        video.videoWidth;
 
     canvas.height =
-        height;
-
+        video.videoHeight;
 
     const context =
         canvas.getContext(
             "2d"
         );
 
-
-    context.save();
-
-    context.translate(
-        width,
-        0
-    );
-
-    context.scale(
-        -1,
-        1
-    );
-
-
     context.drawImage(
         video,
         0,
         0,
-        width,
-        height
+        canvas.width,
+        canvas.height
     );
 
-
-    context.restore();
-
-
-    const imageData =
+    const image =
         canvas.toDataURL(
             "image/jpeg",
             0.85
         );
 
+    liveImage.value =
+        image;
 
-    livePhoto.value =
-        imageData;
+    photoCaptured = true;
 
+    photoStatus.innerText =
+        "✓ Photo captured successfully.";
 
-    preview.src =
-        imageData;
+    photoStatus.style.color =
+        "green";
 
-
-    preview.style.display =
-        "block";
-
-
-    video.style.display =
-        "none";
-
-
-    captureBtn.style.display =
-        "none";
-
-
-    retakeBtn.style.display =
-        "inline-block";
-
-
-    status.textContent =
-        "✓ Live photo captured successfully.";
-
-
-    status.classList.remove(
-        "error"
-    );
-
-    status.classList.add(
-        "success"
-    );
-
-
-    photoCaptured =
-        true;
-
-
-    stopCamera();
-
-
-    updateSubmitButton();
-
-
-    console.log(
-        "PHOTO CAPTURED:",
-        livePhoto.value.length
-    );
+    updateSubmit();
 
 }
 
 
-// ==========================================
-// RETAKE
-// ==========================================
+// =====================================================
+// SUBMIT ENABLE
+// =====================================================
 
-function retakePhoto() {
+function updateSubmit() {
 
-    const video =
-        document.getElementById(
-            "camera"
-        );
-
-    const preview =
-        document.getElementById(
-            "photoPreview"
-        );
-
-    const livePhoto =
-        document.getElementById(
-            "live_photo"
-        );
-
-    const captureBtn =
-        document.getElementById(
-            "captureBtn"
-        );
-
-    const retakeBtn =
-        document.getElementById(
-            "retakeBtn"
-        );
-
-
-    livePhoto.value =
-        "";
-
-
-    photoCaptured =
-        false;
-
-
-    preview.style.display =
-        "none";
-
-
-    video.style.display =
-        "block";
-
-
-    captureBtn.style.display =
-        "inline-block";
-
-
-    captureBtn.disabled =
-        true;
-
-
-    retakeBtn.style.display =
-        "none";
-
-
-    startCamera();
-
-
-    updateSubmitButton();
-
-}
-
-
-// ==========================================
-// STOP CAMERA
-// ==========================================
-
-function stopCamera() {
-
-    if (cameraStream) {
-
-        cameraStream
-            .getTracks()
-            .forEach(
-                function (track) {
-
-                    track.stop();
-
-                }
-            );
-
-
-        cameraStream =
-            null;
-
-    }
-
-}
-
-
-// ==========================================
-// SUBMIT BUTTON
-// ==========================================
-
-function updateSubmitButton() {
-
-    const submitBtn =
-        document.getElementById(
-            "submitVote"
-        );
-
-
-    const selectedCandidate =
+    const selected =
         document.querySelector(
-            'input[name="candidate_name"]:checked'
+            'input[name="candidate_id"]:checked'
         );
 
-
-    const livePhoto =
-        document.getElementById(
-            "live_photo"
-        );
-
-
-    if (!submitBtn) {
-
-        return;
-
-    }
-
-
-    const candidateSelected =
-        selectedCandidate !== null;
-
-
-    const photoReady =
-        livePhoto &&
-        livePhoto.value.length > 0;
-
-
-    if (
-        candidateSelected &&
-        photoReady
-    ) {
-
-        submitBtn.disabled =
-            false;
-
-
-        submitBtn.textContent =
-            "🗳️ Cast Vote Securely";
-
-    } else {
-
-        submitBtn.disabled =
-            true;
-
-
-        if (!candidateSelected) {
-
-            submitBtn.textContent =
-                "Select Candidate First";
-
-        } else {
-
-            submitBtn.textContent =
-                "Capture Photo First";
-
-        }
-
-    }
+    submitBtn.disabled =
+        !selected ||
+        !photoCaptured;
 
 }
 
 
-// ==========================================
+// =====================================================
 // FORM SUBMIT
-// ==========================================
+// =====================================================
 
-document.getElementById(
-    "voteForm"
-).addEventListener(
-    "submit",
-    function (event) {
+document
+    .getElementById("voteForm")
+    .addEventListener(
+        "submit",
+        function(event) {
 
-        const selectedCandidate =
-            document.querySelector(
-                'input[name="candidate_name"]:checked'
-            );
+            const selected =
+                document.querySelector(
+                    'input[name="candidate_id"]:checked'
+                );
 
+            if (!selected) {
 
-        const livePhoto =
-            document.getElementById(
-                "live_photo"
-            );
+                event.preventDefault();
 
+                alert(
+                    "Please select a candidate."
+                );
 
-        if (!selectedCandidate) {
+                return;
 
-            event.preventDefault();
+            }
 
-            alert(
-                "Please select a candidate."
-            );
+            if (!photoCaptured) {
 
-            return;
+                event.preventDefault();
 
-        }
+                alert(
+                    "Please capture your live photo."
+                );
 
+                return;
 
-        if (
-            !livePhoto ||
-            !livePhoto.value
-        ) {
+            }
 
-            event.preventDefault();
+            submitBtn.disabled =
+                true;
 
-            alert(
-                "Please capture your live photo."
-            );
-
-            return;
+            submitBtn.innerText =
+                "Submitting Vote...";
 
         }
-
-
-        console.log(
-            "================================"
-        );
-
-        console.log(
-            "SUBMITTING VOTE"
-        );
-
-        console.log(
-            "Candidate:",
-            selectedCandidate.value
-        );
-
-        console.log(
-            "Photo size:",
-            livePhoto.value.length
-        );
-
-        console.log(
-            "================================"
-        );
-
-    }
-);
-
-
-// ==========================================
-// PAGE EXIT
-// ==========================================
-
-window.addEventListener(
-    "beforeunload",
-    function () {
-
-        stopCamera();
-
-    }
-);
+    );
 
 </script>
 

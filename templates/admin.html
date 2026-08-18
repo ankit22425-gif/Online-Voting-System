@@ -1,908 +1,783 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>Admin Dashboard | Government Election Portal</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
+    <title>Election Admin Dashboard</title>
 
-    body {
-        background: #f4f6f8;
-        color: #263238;
-    }
+    <style>
 
-    /* =========================
-       TRICOLOR
-    ========================== */
-
-    .tricolor {
-        height: 7px;
-        background: linear-gradient(
-            to right,
-            #ff9933 0%,
-            #ff9933 33.33%,
-            #ffffff 33.33%,
-            #ffffff 66.66%,
-            #138808 66.66%,
-            #138808 100%
-        );
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    header {
-        background: #ffffff;
-        border-bottom: 1px solid #d9dee5;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .header-container {
-        width: 92%;
-        max-width: 1250px;
-        min-height: 88px;
-        margin: auto;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }
-
-    .emblem {
-        width: 58px;
-        height: 58px;
-
-        border: 2px solid #8a6d3b;
-        border-radius: 50%;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background: #fffdf7;
-        font-size: 29px;
-
-        box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-    }
-
-    .brand h1 {
-        color: #123c69;
-        font-size: 21px;
-        font-weight: 750;
-    }
-
-    .brand p {
-        color: #667085;
-        font-size: 12px;
-        margin-top: 4px;
-    }
-
-    .admin-info {
-        text-align: right;
-    }
-
-    .admin-info span {
-        color: #667085;
-        font-size: 11px;
-    }
-
-    .admin-info strong {
-        display: block;
-        color: #123c69;
-        font-size: 14px;
-        margin-top: 4px;
-    }
-
-    /* =========================
-       NAVIGATION
-    ========================== */
-
-    nav {
-        background: #123c69;
-    }
-
-    .nav-container {
-        width: 92%;
-        max-width: 1250px;
-        height: 47px;
-        margin: auto;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-title {
-        color: white;
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 8px;
-    }
-
-    .nav-links a {
-        text-decoration: none;
-        color: white;
-
-        padding: 7px 12px;
-        border: 1px solid rgba(255,255,255,0.3);
-        border-radius: 5px;
-
-        font-size: 12px;
-
-        transition: 0.2s;
-    }
-
-    .nav-links a:hover {
-        background: rgba(255,255,255,0.12);
-    }
-
-    /* =========================
-       MAIN
-    ========================== */
-
-    .container {
-        width: 92%;
-        max-width: 1250px;
-        margin: 30px auto;
-    }
-
-    .page-heading {
-        margin-bottom: 22px;
-    }
-
-    .page-heading h2 {
-        color: #123c69;
-        font-size: 28px;
-    }
-
-    .page-heading p {
-        color: #667085;
-        font-size: 13px;
-        margin-top: 5px;
-    }
-
-    /* =========================
-       FLASH MESSAGE
-    ========================== */
-
-    .alert {
-        padding: 13px 16px;
-        margin-bottom: 20px;
-        border-radius: 6px;
-        font-size: 13px;
-    }
-
-    .alert-success {
-        background: #ecfdf3;
-        border: 1px solid #abefc6;
-        color: #067647;
-    }
-
-    .alert-danger {
-        background: #fff1f0;
-        border: 1px solid #ffccc7;
-        color: #b42318;
-    }
-
-    /* =========================
-       STAT CARDS
-    ========================== */
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 17px;
-        margin-bottom: 25px;
-    }
-
-    .stat-card {
-        background: white;
-        border: 1px solid #dfe4ea;
-        border-radius: 8px;
-
-        padding: 20px;
-
-        display: flex;
-        align-items: center;
-        gap: 14px;
-
-        box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-    }
-
-    .stat-icon {
-        width: 50px;
-        height: 50px;
-
-        background: #eef4fa;
-        border-radius: 50%;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 24px;
-    }
-
-    .stat-card small {
-        color: #667085;
-        font-size: 11px;
-    }
-
-    .stat-card strong {
-        display: block;
-        color: #123c69;
-        font-size: 25px;
-        margin-top: 3px;
-    }
-
-    /* =========================
-       DASHBOARD GRID
-    ========================== */
-
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: 20px;
-        margin-bottom: 22px;
-    }
-
-    .panel {
-        background: white;
-        border: 1px solid #dfe4ea;
-        border-radius: 9px;
-
-        overflow: hidden;
-
-        box-shadow: 0 5px 18px rgba(0,0,0,0.05);
-    }
-
-    .panel-header {
-        background: #123c69;
-        color: white;
-
-        padding: 16px 19px;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .panel-header h3 {
-        font-size: 16px;
-    }
-
-    .panel-header span {
-        font-size: 11px;
-        opacity: 0.85;
-    }
-
-    .panel-body {
-        padding: 20px;
-    }
-
-    /* =========================
-       CANDIDATE RESULT
-    ========================== */
-
-    .candidate {
-        margin-bottom: 20px;
-    }
-
-    .candidate:last-child {
-        margin-bottom: 0;
-    }
-
-    .candidate-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 7px;
-    }
-
-    .candidate-name {
-        font-weight: 700;
-        color: #344054;
-        font-size: 14px;
-    }
-
-    .candidate-party {
-        color: #667085;
-        font-size: 11px;
-        margin-left: 5px;
-    }
-
-    .candidate-votes {
-        color: #123c69;
-        font-weight: 700;
-        font-size: 13px;
-    }
-
-    .progress {
-        width: 100%;
-        height: 9px;
-
-        background: #edf0f3;
-        border-radius: 20px;
-
-        overflow: hidden;
-    }
-
-    .progress-bar {
-        height: 100%;
-        background: #123c69;
-        border-radius: 20px;
-
-        transition: width 0.5s;
-    }
-
-    .candidate-percent {
-        color: #667085;
-        font-size: 10px;
-        margin-top: 5px;
-    }
-
-    /* =========================
-       WINNER PANEL
-    ========================== */
-
-    .winner-box {
-        text-align: center;
-        padding: 15px 10px;
-    }
-
-    .trophy {
-        width: 85px;
-        height: 85px;
-
-        margin: 0 auto 15px;
-
-        border-radius: 50%;
-
-        background: #fff7e8;
-        border: 2px solid #f0c36d;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 42px;
-    }
-
-    .winner-box h4 {
-        color: #667085;
-        font-size: 12px;
-        margin-bottom: 7px;
-    }
-
-    .winner-box h2 {
-        color: #123c69;
-        font-size: 23px;
-    }
-
-    .winner-box p {
-        color: #667085;
-        font-size: 12px;
-        margin-top: 6px;
-    }
-
-    .no-winner {
-        color: #667085;
-        padding: 25px;
-        font-size: 13px;
-    }
-
-    /* =========================
-       ACTION PANEL
-    ========================== */
-
-    .actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .action-btn {
-        border: none;
-        text-decoration: none;
-        cursor: pointer;
-
-        padding: 11px 17px;
-        border-radius: 6px;
-
-        font-size: 13px;
-        font-weight: 700;
-
-        transition: 0.2s;
-    }
-
-    .archive-btn {
-        background: #eef4fa;
-        color: #123c69;
-        border: 1px solid #cdddec;
-    }
-
-    .archive-btn:hover {
-        background: #dfeaf5;
-    }
-
-    .reset-btn {
-        background: #123c69;
-        color: white;
-    }
-
-    .reset-btn:hover {
-        background: #0d3155;
-    }
-
-    /* =========================
-       VOTER TABLE
-    ========================== */
-
-    .table-panel {
-        margin-top: 22px;
-    }
-
-    .table-wrapper {
-        overflow-x: auto;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 650px;
-    }
-
-    th {
-        background: #f1f4f7;
-        color: #475467;
-
-        text-align: left;
-        padding: 13px 16px;
-
-        font-size: 11px;
-        font-weight: 700;
-
-        border-bottom: 1px solid #dfe4ea;
-    }
-
-    td {
-        padding: 13px 16px;
-
-        font-size: 12px;
-        color: #475467;
-
-        border-bottom: 1px solid #edf0f2;
-    }
-
-    tbody tr:hover {
-        background: #f8fafc;
-    }
-
-    .status {
-        display: inline-block;
-
-        background: #ecfdf3;
-        color: #067647;
-
-        border: 1px solid #abefc6;
-
-        padding: 4px 9px;
-        border-radius: 20px;
-
-        font-size: 10px;
-        font-weight: 700;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer {
-        margin-top: 45px;
-        background: #102f4f;
-        color: #dbe5ef;
-    }
-
-    .footer-main {
-        width: 92%;
-        max-width: 1250px;
-        margin: auto;
-
-        padding: 28px 0;
-
-        display: flex;
-        justify-content: space-between;
-    }
-
-    footer h3 {
-        color: white;
-        font-size: 15px;
-        margin-bottom: 8px;
-    }
-
-    footer p {
-        font-size: 12px;
-        line-height: 1.6;
-    }
-
-    .footer-right {
-        text-align: right;
-    }
-
-    .copyright {
-        border-top: 1px solid rgba(255,255,255,0.12);
-        text-align: center;
-        padding: 13px;
-        font-size: 11px;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1000px) {
-
-        .stats {
-            grid-template-columns: repeat(2, 1fr);
+        * {
+            box-sizing: border-box;
         }
 
-        .dashboard-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (max-width: 650px) {
-
-        .header-container {
-            min-height: 75px;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #172033;
         }
 
-        .admin-info {
-            display: none;
+        /* ================= HEADER ================= */
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 22px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .brand h1 {
-            font-size: 17px;
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 900;
         }
 
-        .brand p {
-            font-size: 10px;
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .emblem {
-            width: 50px;
-            height: 50px;
-            font-size: 25px;
+        .home-btn,
+        .logout {
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: .2s;
         }
 
-        .nav-title {
-            font-size: 11px;
+        .home-btn {
+            background: #2563eb;
         }
 
-        .nav-links a {
-            font-size: 10px;
-            padding: 6px 8px;
+        .logout {
+            background: #dc2626;
         }
 
-        .stats {
-            grid-template-columns: 1fr;
+        .home-btn:hover,
+        .logout:hover {
+            transform: translateY(-2px);
+            opacity: .9;
         }
+
+        /* ================= CONTAINER ================= */
 
         .container {
             width: 94%;
+            max-width: 1400px;
+            margin: 25px auto;
         }
 
-        .footer-main {
-            flex-direction: column;
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
         }
 
-        .footer-right {
+        .title h2 {
+            font-size: 34px;
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+
+        .title p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* ================= PANEL ================= */
+
+        .panel {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        }
+
+        .panel h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        /* ================= ELECTION ================= */
+
+        .election-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .election-form button {
+            width: 100%;
+            border: 0;
+            padding: 18px;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .election-form button:hover {
+            transform: translateY(-3px);
+            opacity: .9;
+        }
+
+        /* ================= CURRENT ELECTION ================= */
+
+        .current-election {
+            text-align: center;
+            padding: 30px;
+            background: #eff6ff;
+            border-radius: 14px;
+            border: 2px solid #2563eb;
+        }
+
+        .current-election .flag {
+            font-size: 50px;
+        }
+
+        .current-election h2 {
+            margin: 8px 0;
+            font-size: 34px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .active {
+            display: inline-block;
+            background: #16a34a;
+            color: white;
+            padding: 7px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns:
+                1fr 1fr 220px auto;
+            gap: 12px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        .add-btn {
+            border: 0;
+            background: #16a34a;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #15803d;
+        }
+
+        /* ================= CANDIDATES ================= */
+
+        .candidate-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .candidate-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+            padding: 18px;
+            background: #fafafa;
+            transition: .2s;
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,.08);
+        }
+
+        .symbol {
+            font-size: 45px;
+            margin-bottom: 8px;
+        }
+
+        .candidate-card h4 {
+            margin: 5px 0;
+            font-size: 20px;
+        }
+
+        .party {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .delete-btn {
+            border: 0;
+            background: #dc2626;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 35px;
+            font-weight: 900;
+            margin-top: 8px;
+        }
+
+        /* ================= RESULTS ================= */
+
+        .results {
+            display: grid;
+            gap: 15px;
+        }
+
+        .result-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+            padding: 18px;
+            background: #fff;
+        }
+
+        .result-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .candidate-info {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .candidate-symbol {
+            font-size: 35px;
+        }
+
+        .candidate-name {
+            font-weight: bold;
+            font-size: 19px;
+        }
+
+        .candidate-party {
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .vote-number {
+            font-weight: bold;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+
+        .bar {
+            height: 13px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 20px;
+            transition: width .5s ease;
+        }
+
+        /* ================= LEADER ================= */
+
+        .leader {
+            margin-top: 25px;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            background: #fff7ed;
+            border: 2px solid #f97316;
+        }
+
+        .leader h2 {
+            margin: 7px;
+            font-size: 30px;
+        }
+
+        .leader p {
+            color: #64748b;
+        }
+
+        .tie-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tie-item {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        /* ================= ADMIN ACTION ================= */
+
+        .archive-btn {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #0f766e;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .archive-btn:hover {
+            background: #115e59;
+        }
+
+        .reset-btn {
+            width: 100%;
+            border: 0;
+            padding: 16px;
+            border-radius: 10px;
+            background: #7c3aed;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .reset-btn:hover {
+            background: #6d28d9;
+            transform: translateY(-2px);
+        }
+
+        /* ================= HISTORY ================= */
+
+        .history-wrapper {
+            overflow-x: auto;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
             text-align: left;
         }
-    }
-</style>
-```
+
+        .history-table th {
+            background: #f8fafc;
+            font-weight: bold;
+        }
+
+        /* ================= FLASH ================= */
+
+        .flash {
+            padding: 14px 18px;
+            border-radius: 9px;
+            margin-bottom: 15px;
+            background: #dbeafe;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .vote-number {
+                font-size: 18px;
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            header {
+                padding: 18px;
+            }
+
+            header h1 {
+                font-size: 21px;
+            }
+
+            .title h2 {
+                font-size: 25px;
+            }
+
+            .current-election h2 {
+                font-size: 25px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            .tie-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-```
-<!-- =========================
-     TRICOLOR
-========================== -->
 
-<div class="tricolor"></div>
-
-
-<!-- =========================
+<!-- =====================================================
      HEADER
-========================== -->
+===================================================== -->
 
 <header>
 
-    <div class="header-container">
+    <h1>
+        🇮🇳 Election Administration Dashboard
+    </h1>
 
-        <div class="brand">
+    <div class="header-buttons">
 
-            <div class="emblem">
-                🏛️
-            </div>
+        <!-- HOME BUTTON -->
 
-            <div>
+        <a
+            href="{{ url_for('home') }}"
+            class="home-btn"
+        >
+            🏠 Home
+        </a>
 
-                <h1>Government Election Portal</h1>
+        <!-- LOGOUT -->
 
-                <p>
-                    Digital Governance • Secure • Transparent • Trusted
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="admin-info">
-
-            <span>Administrative Control Panel</span>
-
-            <strong>RAJYA SABHA ELECTION</strong>
-
-        </div>
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            Logout
+        </a>
 
     </div>
 
 </header>
 
 
-<!-- =========================
-     NAVIGATION
-========================== -->
-
-<nav>
-
-    <div class="nav-container">
-
-        <div class="nav-title">
-            🛡️ Election Administration Dashboard
-        </div>
-
-        <div class="nav-links">
-
-            <a href="{{ url_for('historical_archive') }}">
-                📁 Historical Archive
-            </a>
-
-            <a href="{{ url_for('home') }}">
-                🏠 Home
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
+<div class="container">
 
 
-<!-- =========================
-     MAIN
-========================== -->
+    <!-- =================================================
+         TITLE
+    ================================================== -->
 
-<main class="container">
+    <div class="title">
 
-    <div class="page-heading">
-
-        <h2>Election Administration Dashboard</h2>
+        <h2>
+            ONLINE ELECTION MANAGEMENT
+        </h2>
 
         <p>
-            Monitor current election activity, vote counting
-            and election results.
+            Manage Election • Candidates • Voting • Results
         </p>
 
     </div>
 
 
-    <!-- =========================
-         FLASH MESSAGES
-    ========================== -->
+    <!-- =================================================
+         FLASH MESSAGE
+    ================================================== -->
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% with messages = get_flashed_messages(
+        with_categories=true
+    ) %}
 
-        {% if messages %}
+        {% for category, message in messages %}
 
-            {% for category, message in messages %}
+            <div class="flash">
+                {{ message }}
+            </div>
 
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-
-            {% endfor %}
-
-        {% endif %}
+        {% endfor %}
 
     {% endwith %}
 
 
-    <!-- =========================
-         STATISTICS
-    ========================== -->
+    <!-- =================================================
+         SELECT ELECTION
+    ================================================== -->
 
-    <section class="stats">
+    <div class="panel">
 
-        <div class="stat-card">
+        <h3>
+            🗳️ Select Election
+        </h3>
 
-            <div class="stat-icon">
-                🗳️
-            </div>
+        <div class="election-grid">
 
-            <div>
+            {% for election_type in election_types %}
 
-                <small>Live Votes Cast</small>
+                <form
+                    method="POST"
+                    action="{{ url_for('create_new_election') }}"
+                    class="election-form"
+                >
 
-                <strong>
-                    {{ total_votes }}
-                </strong>
+                    <input
+                        type="hidden"
+                        name="election_type"
+                        value="{{ election_type }}"
+                    >
 
-            </div>
+                    <button type="submit">
 
-        </div>
+                        {% if "RAJYA SABHA" in election_type %}
+                            🏛️
+                        {% elif "LOK SABHA" in election_type %}
+                            🇮🇳
+                        {% else %}
+                            🏘️
+                        {% endif %}
 
+                        <br><br>
 
-        <div class="stat-card">
+                        {{ election_type }}
 
-            <div class="stat-icon">
-                👥
-            </div>
+                    </button>
 
-            <div>
+                </form>
 
-                <small>Registered Candidates</small>
-
-                <strong>
-                    {{ results|length }}
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                📊
-            </div>
-
-            <div>
-
-                <small>Election Status</small>
-
-                <strong style="font-size:18px; color:#067647;">
-                    ACTIVE
-                </strong>
-
-            </div>
+            {% endfor %}
 
         </div>
 
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🏆
-            </div>
-
-            <div>
-
-                <small>Current Leader</small>
-
-                <strong style="font-size:16px;">
-
-                    {% if winner %}
-                        {{ winner }}
-                    {% else %}
-                        —
-                    {% endif %}
-
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
+    </div>
 
 
-    <!-- =========================
-         RESULTS + WINNER
-    ========================== -->
+    <!-- =================================================
+         CURRENT ELECTION
+    ================================================== -->
 
-    <section class="dashboard-grid">
-
-
-        <!-- Candidate Results -->
+    {% if election %}
 
         <div class="panel">
 
-            <div class="panel-header">
+            <div class="current-election">
 
-                <h3>
-                    📊 Live Election Results
-                </h3>
+                <div class="flag">
+                    🇮🇳
+                </div>
 
-                <span>
-                    Current Election
+                <h2>
+                    {{ election.election_name }}
+                </h2>
+
+                <span class="active">
+                    {{ election.status }}
                 </span>
 
             </div>
 
+        </div>
 
-            <div class="panel-body">
-
-                {% for candidate in results %}
-
-                <div class="candidate">
-
-                    <div class="candidate-top">
-
-                        <div>
-
-                            <span class="candidate-name">
-                                {{ candidate.symbol }}
-                                {{ candidate.name }}
-                            </span>
-
-                            <span class="candidate-party">
-                                {{ candidate.party }}
-                            </span>
-
-                        </div>
-
-                        <span class="candidate-votes">
-                            {{ candidate.votes }} Votes
-                        </span>
-
-                    </div>
+    {% endif %}
 
 
-                    <div class="progress">
+    <!-- =================================================
+         CANDIDATE NOMINATION
+    ================================================== -->
 
-                        <div
-                            class="progress-bar"
-                            style="width: {{ candidate.percentage }}%;"
-                        ></div>
+    {% if election %}
 
-                    </div>
+        <div class="panel">
 
+            <h3>
+                👤 Candidate Nomination
+            </h3>
 
-                    <div class="candidate-percent">
+            <p>
+                Maximum 15 candidates can be added.
+            </p>
 
-                        {{ candidate.percentage }}% of total votes
+            <form
+                method="POST"
+                action="{{ url_for('add_new_candidate') }}"
+            >
 
-                    </div>
+                <div class="form-grid">
+
+                    <input
+                        type="text"
+                        name="candidate_name"
+                        placeholder="Candidate Name"
+                        maxlength="100"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        name="party_name"
+                        placeholder="Party Name"
+                        maxlength="100"
+                        required
+                    >
+
+                    <select
+                        name="symbol"
+                        required
+                    >
+
+                        <option value="">
+                            Select Symbol
+                        </option>
+
+                        {% for symbol in symbols %}
+
+                            <option value="{{ symbol }}">
+                                {{ symbol }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                    <button
+                        type="submit"
+                        class="add-btn"
+                    >
+                        ➕ Add Candidate
+                    </button>
 
                 </div>
+
+            </form>
+
+
+            <!-- CANDIDATE CARDS -->
+
+            <div class="candidate-grid">
+
+                {% for candidate in candidates %}
+
+                    <div class="candidate-card">
+
+                        <div class="symbol">
+                            {{ candidate.symbol }}
+                        </div>
+
+                        <h4>
+                            {{ candidate.name }}
+                        </h4>
+
+                        <div class="party">
+                            {{ candidate.party }}
+                        </div>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'remove_candidate',
+                                candidate_id=candidate.id
+                            ) }}"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-btn"
+                                onclick="return confirm(
+                                    'Remove this candidate?'
+                                );"
+                            >
+                                🗑️ Remove
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% else %}
+
+                    <p>
+                        No candidates nominated yet.
+                    </p>
 
                 {% endfor %}
 
@@ -910,347 +785,459 @@
 
         </div>
 
+    {% endif %}
 
-        <!-- Winner -->
 
-        <div class="panel">
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
 
-            <div class="panel-header">
+    <div class="stats">
 
-                <h3>
-                    🏆 Election Leader
-                </h3>
+        <div class="stat">
 
-                <span>
-                    Live Status
-                </span>
-
+            <div>
+                🗳️ Live Votes Cast
             </div>
 
+            <div class="stat-number">
+                {{ total_votes }}
+            </div>
 
-            <div class="panel-body">
+        </div>
 
-                {% if winner %}
 
-                <div class="winner-box">
+        <div class="stat">
 
-                    <div class="trophy">
-                        🏆
-                    </div>
+            <div>
+                👤 Candidates
+            </div>
 
-                    <h4>
-                        CURRENT LEADING CANDIDATE
-                    </h4>
+            <div class="stat-number">
+                {{ candidates|length }}
+            </div>
 
-                    <h2>
-                        {{ winner }}
-                    </h2>
+        </div>
 
-                    <p>
-                        Based on the current vote count.
-                    </p>
 
-                </div>
+        <div class="stat">
 
+            <div>
+                📊 Election Status
+            </div>
+
+            <div
+                class="stat-number"
+                style="font-size:22px;"
+            >
+
+                {% if election %}
+                    {{ election.status }}
                 {% else %}
-
-                <div class="winner-box">
-
-                    <div class="trophy">
-                        🗳️
-                    </div>
-
-                    <h4>
-                        CURRENT STATUS
-                    </h4>
-
-                    <h2>
-                        No Votes Yet
-                    </h2>
-
-                    <p>
-                        Winner will appear after votes are cast.
-                    </p>
-
-                </div>
-
+                    NOT SELECTED
                 {% endif %}
 
             </div>
 
         </div>
 
-    </section>
-
-
-    <!-- =========================
-         ADMIN ACTIONS
-    ========================== -->
-
-    <div class="panel">
-
-        <div class="panel-header">
-
-            <h3>
-                ⚙️ Election Administration
-            </h3>
-
-            <span>
-                Authorized Actions
-            </span>
-
-        </div>
-
-
-        <div class="panel-body">
-
-            <div class="actions">
-
-                <a
-                    href="{{ url_for('historical_archive') }}"
-                    class="action-btn archive-btn"
-                >
-                    📁 View Historical Archive
-                </a>
-
-
-                <form
-                    action="{{ url_for('reset_election') }}"
-                    method="POST"
-                    style="display:inline;"
-                    onsubmit="return confirmReset();"
-                >
-
-                    <button
-                        type="submit"
-                        class="action-btn reset-btn"
-                    >
-                        🏆 Declare Result & Start New Election
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
     </div>
 
 
-    <!-- =========================
-         CURRENT VOTERS
-    ========================== -->
+    <!-- =================================================
+         LIVE ELECTION RESULT
+    ================================================== -->
 
-    <div class="panel table-panel">
+    <div class="panel">
 
-        <div class="panel-header">
-
-            <h3>
-                👥 Current Election Voters
-            </h3>
-
-            <span>
-                {{ voters_list|length }} Vote Records
-            </span>
-
-        </div>
+        <h3>
+            📊 Live Election Result
+        </h3>
 
 
-        {% if voters_list %}
+        {% if results %}
 
-        <div class="table-wrapper">
+            <div class="results">
 
-            <table>
+                {% for candidate in results %}
 
-                <thead>
+                    <div class="result-card">
 
-                    <tr>
+                        <div class="result-top">
 
-                        <th>
-                            Voter ID
-                        </th>
+                            <div class="candidate-info">
 
-                        <th>
-                            Selected Candidate
-                        </th>
+                                <div class="candidate-symbol">
+                                    {{ candidate.symbol }}
+                                </div>
 
-                        <th>
-                            Vote Record ID
-                        </th>
+                                <div>
 
-                        <th>
-                            Status
-                        </th>
+                                    <div class="candidate-name">
+                                        {{ candidate.name }}
+                                    </div>
 
-                    </tr>
+                                    <div class="candidate-party">
+                                        {{ candidate.party }}
+                                    </div>
 
-                </thead>
+                                </div>
+
+                            </div>
 
 
-                <tbody>
+                            <div class="vote-number">
 
-                    {% for voter in voters_list %}
+                                {{ candidate.votes }}
+                                Votes
 
-                    <tr>
+                            </div>
 
-                        <td>
-                            <strong>
-                                {{ voter[0] }}
-                            </strong>
-                        </td>
+                        </div>
 
-                        <td>
-                            {{ voter[1] }}
-                        </td>
 
-                        <td>
-                            #{{ voter[2] }}
-                        </td>
+                        <div class="bar">
 
-                        <td>
+                            <div
+                                class="bar-fill"
+                                style="
+                                    width:
+                                    {{ candidate.percentage }}%;
+                                "
+                            ></div>
 
-                            <span class="status">
-                                ✓ VERIFIED VOTE
-                            </span>
+                        </div>
 
-                        </td>
+                    </div>
 
-                    </tr>
+                {% endfor %}
 
-                    {% endfor %}
+            </div>
 
-                </tbody>
 
-            </table>
+            <!-- =================================================
+                 LEADER / TIE
+            ================================================== -->
 
-        </div>
+            {% if total_votes > 0 %}
+
+                {% if leader_count > 1 %}
+
+                    <!-- TIE -->
+
+                    <div class="leader">
+
+                        <div style="font-size:50px;">
+                            ⚖️
+                        </div>
+
+                        <h2>
+                            CURRENTLY TIED
+                        </h2>
+
+                        <p>
+                            Multiple candidates have
+                            equal highest votes.
+                        </p>
+
+                        <div class="tie-list">
+
+                            {% for candidate in results %}
+
+                                {% if candidate.votes == max_votes %}
+
+                                    <div class="tie-item">
+
+                                        <span>
+                                            {{ candidate.symbol }}
+                                            {{ candidate.name }}
+                                        </span>
+
+                                        <span>
+                                            {{ candidate.votes }}
+                                            Votes
+                                        </span>
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                {% else %}
+
+                    <!-- SINGLE LEADER -->
+
+                    <div class="leader">
+
+                        <div style="font-size:50px;">
+                            🏆
+                        </div>
+
+                        <h2>
+                            {{ winner }}
+                        </h2>
+
+                        <p>
+                            Current Leading Candidate
+                        </p>
+
+                        <strong>
+                            {{ max_votes }} Votes
+                        </strong>
+
+                    </div>
+
+                {% endif %}
+
+
+            {% else %}
+
+                <!-- NO VOTES -->
+
+                <div class="leader">
+
+                    <div style="font-size:50px;">
+                        🗳️
+                    </div>
+
+                    <h2>
+                        No Votes Yet
+                    </h2>
+
+                    <p>
+                        Votes will appear here as
+                        they are cast.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
 
         {% else %}
 
-        <div style="
-            text-align:center;
-            padding:45px 20px;
-            color:#667085;
-        ">
+            <!-- NO CANDIDATES -->
 
-            <div style="font-size:45px;">
-                🗳️
+            <div class="leader">
+
+                <div style="font-size:50px;">
+                    👤
+                </div>
+
+                <h2>
+                    No Candidates
+                </h2>
+
+                <p>
+                    Add candidates before starting voting.
+                </p>
+
             </div>
-
-            <h3 style="
-                color:#344054;
-                margin-top:10px;
-                font-size:17px;
-            ">
-                No Votes Cast Yet
-            </h3>
-
-            <p style="
-                margin-top:5px;
-                font-size:12px;
-            ">
-                Voter records will appear here after
-                successful voting.
-            </p>
-
-        </div>
 
         {% endif %}
 
     </div>
 
-</main>
+
+    <!-- =================================================
+         ADMIN ACTIONS
+    ================================================== -->
+
+    <div class="panel">
+
+        <h3>
+            ⚙️ Election Administration
+        </h3>
 
 
-<!-- =========================
-     FOOTER
-========================== -->
+        <!-- HISTORY -->
 
-<footer>
+        <a
+            href="{{ url_for('historical_archive') }}"
+            class="archive-btn"
+        >
+            📁 View Historical Archive
+        </a>
 
-    <div class="footer-main">
 
-        <div>
+        <!-- DECLARE RESULT -->
 
-            <h3>
-                Government Election Portal
-            </h3>
+        {% if election %}
+
+            <form
+                method="POST"
+                action="{{ url_for('reset_election') }}"
+                onsubmit="return confirmReset();"
+            >
+
+                <button
+                    type="submit"
+                    class="reset-btn"
+                >
+                    🏆 Declare Result &
+                    Start New Election
+                </button>
+
+            </form>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =================================================
+         PREVIOUS ELECTIONS
+    ================================================== -->
+
+    <div class="panel">
+
+        <h3>
+            📚 Previous Elections
+        </h3>
+
+
+        {% if past_elections %}
+
+            <div class="history-wrapper">
+
+                <table class="history-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Election
+                            </th>
+
+                            <th>
+                                Winner
+                            </th>
+
+                            <th>
+                                Votes
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for row in past_elections %}
+
+                            <tr>
+
+                                <td>
+                                    {{ row[2] }}
+                                </td>
+
+                                <td>
+                                    {% if row[3] %}
+                                        🏆 {{ row[3] }}
+                                    {% else %}
+                                        ⚖️ Tied / No Winner
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {{ row[4] }}
+                                </td>
+
+                                <td>
+                                    {{ row[5] }}
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
 
             <p>
-                Rajya Sabha Election<br>
-                Online Voting Management System
+                No previous elections available.
             </p>
 
-        </div>
-
-
-        <div class="footer-right">
-
-            <h3>
-                Administrative Security
-            </h3>
-
-            <p>
-                🔒 Secure Access<br>
-                📊 Transparent Counting<br>
-                📁 Historical Records
-            </p>
-
-        </div>
+        {% endif %}
 
     </div>
 
 
-    <div class="copyright">
-
-        © 2026 Government Election Portal |
-        Online Voting System |
-        Administrative Dashboard
-
-    </div>
-
-</footer>
+</div>
 
 
-<!-- =========================
+<!-- =====================================================
      JAVASCRIPT
-========================== -->
+===================================================== -->
 
 <script>
 
-    function confirmReset() {
+function confirmReset() {
 
-        const totalVotes = {{ total_votes }};
+    return confirm(
+        "⚠️ DECLARE RESULT\n\n" +
+        "Are you sure you want to declare the current result " +
+        "and start a new election?\n\n" +
+        "The current election will be archived and " +
+        "the new election will start with 0 votes."
+    );
 
-        if (totalVotes === 0) {
+}
 
-            return confirm(
-                "No votes have been cast yet. " +
-                "Do you still want to conclude this election " +
-                "and start a new election?"
-            );
+
+/* ==========================================
+   PREVENT DOUBLE CLICK ON DECLARE BUTTON
+========================================== */
+
+const resetForm = document.querySelector(
+    'form[action="{{ url_for("reset_election") }}"]'
+);
+
+if (resetForm) {
+
+    resetForm.addEventListener(
+        "submit",
+        function () {
+
+            const button =
+                resetForm.querySelector(
+                    ".reset-btn"
+                );
+
+            if (button) {
+
+                button.disabled = true;
+
+                button.innerHTML =
+                    "⏳ Declaring Result...";
+
+            }
 
         }
+    );
 
-        return confirm(
-            "WARNING!\n\n" +
-            "This will:\n" +
-            "• Declare the current result\n" +
-            "• Save the election in historical archive\n" +
-            "• Archive current votes\n" +
-            "• Clear current election votes\n" +
-            "• Start a new election\n\n" +
-            "Are you sure you want to continue?"
-        );
-    }
+}
 
 </script>
-<script>
-    // Dashboard automatically refresh every 3 seconds
-    setInterval(function () {
-        location.reload();
-    }, 3000);
-</script>
+
 
 </body>
+
 </html>
